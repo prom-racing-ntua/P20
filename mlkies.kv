@@ -1,0 +1,56 @@
+<FloatLayout>:
+    FloatLayout:
+        pos_hint: {"x": 0.6} 
+        size_hint: 0.4, 1
+        Label:
+            pos_hint: {"top":1}
+            size_hint: 1, 0.1
+            text: "Tyre Temps"
+        Label:
+            id: fl
+            pos_hint: {"top":0.9, "left":0.8 }
+            size_hint: 0.3, 0.3 
+            text: "front left"
+            canvas.before:
+                Color:
+                    rgb: (1, 0, 0, 0.5)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: 50, 50 , 50, 50
+        Label:
+            id: fr
+            pos_hint: {"top":0.9, "right":0.9 }
+            size_hint: 0.3, 0.3 
+            text: "front right"
+            canvas.before:
+                Color:
+                    rgb: (1, 0, 0, 0.5)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: 50, 50 , 50, 50
+        Label:
+            id: rl
+            pos_hint: {"bottom":0.9, "left":0.9 }
+            size_hint: 0.3, 0.3 
+            text: "rear left"
+            canvas.before:
+                Color:
+                    rgb: (1, 0, 0, 0.5)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: 50, 50 , 50, 50
+        Label:
+            id: rr
+            pos_hint: {"bottom":0.9, "right":0.9 }
+            size_hint: 0.3, 0.3 
+            text: "rear right"
+            canvas.before:
+                Color:
+                    rgb: (1, 0, 0, 0.5)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: 50, 50 , 50, 50
