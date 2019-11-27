@@ -30,9 +30,12 @@ Builder.load_string('''
                 text: 'Button that does nothing'
     TabbedPanelItem:
         text: 'Tire Temps'
-        Tire_Temps:
-            pos_hint: {"bottom":1, "left":0.95}
-            size_hint: 1, 0.3
+        BoxLayout:
+            pos: self.pos
+            size: self.size    
+            Tire_Temps:
+                #pos_hint: {"left":0.4, "top":0.85}
+                #size_hint: 0.4, 0.3
 
         
 ''')

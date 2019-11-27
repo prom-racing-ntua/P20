@@ -15,6 +15,7 @@ from tire import Tire
 class Tire_Temps(FloatLayout):
     def __init__(self, **kwargs):
         super(Tire_Temps, self).__init__(**kwargs)
+        print(self.x, self.y)
         self.fl = Tire(pos_hint={"top": 1, "left": 1}, size_hint=(0.4, 0.45))
         self.fr = Tire(pos_hint={"top": 1, "right": 1}, size_hint=(0.4, 0.45))
         self.rl = Tire(pos_hint={"bottom": 1, "left": 1}, size_hint=(0.4, 0.45))
