@@ -13,6 +13,7 @@ from kivy.lang import Builder
 
 from left import Left
 from middle import Middle
+from right import Right
 
 class MainScreen(App):
 
@@ -23,10 +24,11 @@ class MainScreen(App):
         mainscreen.cols = 3
         left = Left()
         middle = Middle()
+        right = Right()
 
         mainscreen.add_widget(left)
         mainscreen.add_widget(middle)
-        mainscreen.add_widget(Label(text = "tipota"))
+        mainscreen.add_widget(right)
         return mainscreen
 
 

@@ -1,7 +1,5 @@
 import kivy
 kivy.require('1.10.1')
-from kivy.graphics import Rectangle, Color
-from kivy.uix.image import Image
 from kivy.lang import Builder
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
@@ -24,11 +22,11 @@ Builder.load_string('''
                 pos: self.x, self.y
                 size: self.size
                 radius: [20,0,0,20]
-            #Color:
-                #rgba: 1,1,1,1
-            #Line:
-               #rectangle: self.x,self.y,self.width,self.height
-                #width: 1
+            Color:
+                rgba: 1,0,0,1
+            Line:
+                rectangle: self.x,self.y,self.width,self.height
+                width: 2
     Label:
         text: "li"
         canvas.before:
@@ -38,6 +36,11 @@ Builder.load_string('''
                 pos: self.x, self.y
                 size: self.size
                 radius: [0,0,0,0]
+            Color:
+                rgba: 1,0,0,1
+            Line:
+                rectangle: self.x,self.y,self.width,self.height
+                width: 2
     Label:
         text: "ri"
         canvas.before:
@@ -47,6 +50,11 @@ Builder.load_string('''
                 pos: self.x, self.y
                 size: self.size
                 radius: [0,0,0,0]
+            Color:
+                rgba: 1,0,0,1
+            Line:
+                rectangle: self.x,self.y,self.width,self.height
+                width: 2
     Label:
         text: "ro"
         canvas.before:
@@ -56,6 +64,11 @@ Builder.load_string('''
                 pos: self.x, self.y
                 size: self.size
                 radius: [0,20,20,0]
+            Color:
+                rgba: 1,0,0,1
+            Line:
+                rectangle: self.x,self.y,self.width,self.height
+                width: 2
 ''')
 
 class Tire(BoxLayout):

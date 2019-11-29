@@ -31,11 +31,11 @@ Builder.load_string('''
     TabbedPanelItem:
         text: 'Tire Temps'
         BoxLayout:
-            pos: self.pos
-            size: self.size    
+            #pos: self.pos
+            #size: self.size    
             Tire_Temps:
-                #pos_hint: {"left":0.4, "top":0.85}
-                #size_hint: 0.4, 0.3
+                pos_hint: {"left":0, "top":0.85}
+                size_hint: 0.4, 0.3
 
         
 ''')

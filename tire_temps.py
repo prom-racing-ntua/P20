@@ -11,27 +11,25 @@ from kivy.uix.image import Image
 from kivy.config import Config
 Config.set('graphics', 'resizable', True)
 from tire import Tire
+from flashing_arrows import Flashing_Arrows
 
 class Tire_Temps(FloatLayout):
     def __init__(self, **kwargs):
         super(Tire_Temps, self).__init__(**kwargs)
-        print(self.x, self.y)
-        self.fl = Tire(pos_hint={"top": 1, "left": 1}, size_hint=(0.4, 0.45))
-        self.fr = Tire(pos_hint={"top": 1, "right": 1}, size_hint=(0.4, 0.45))
-        self.rl = Tire(pos_hint={"bottom": 1, "left": 1}, size_hint=(0.4, 0.45))
-        self.rr = Tire(pos_hint={"bottom": 1, "right": 1}, size_hint=(0.4, 0.45))
+        print(self.pos_hint, self.size_hint)
+        self.fl = Tire(pos_hint={"x": 0, "y": 0.55}, size_hint=(0.45, 0.45))
+        self.fr = Tire(pos_hint={"x": 0.55, "y": 0.55}, size_hint=(0.45, 0.45))
+        self.rl = Tire(pos_hint={"x": 0, "y": 0}, size_hint=(0.45, 0.45))
+        self.rr = Tire(pos_hint={"x": 0.55, "y": 0}, size_hint=(0.45, 0.45))
         
-        #arrow image
-        #self.arrow = Image(source = "assets/arrow_vector.png")
-        #self.arrow.size_hint_x = 0.7
-        #self.arrow.size_hint_y = 0.7
-        #self.arrow.pos_hint = {"x":0.15, "bottom":0.45}
+        self.arr = Flashing_Arrows(pos_hint={"x": 0.45, "y": 0}, size_hint=(0.1, 1))
 
-        #self.add_widget(self.arrow)
         self.add_widget(self.fl)
         self.add_widget(self.fr)
         self.add_widget(self.rl)
         self.add_widget(self.rr)
+        
+        self.add_widget(self.arr)
 
 
 
