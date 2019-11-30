@@ -8,6 +8,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.uix.tabbedpanel import TabbedPanel
+from kivy.graphics import Mesh
 
 from tire_temps import Tire_Temps  # for test
 
@@ -23,11 +24,10 @@ Builder.load_string('''
             text: 'First tab content area'
     TabbedPanelItem:
         text: 'tab2'
-        BoxLayout:
-            Label:
-                text: 'Second tab content area'
-            Button:
-                text: 'Button that does nothing'
+        #Mesh:
+            #mode: "triangle_fan"
+            #vertices: [0,1,2]
+            #indices: [0,1,2]
     TabbedPanelItem:
         text: 'Tire Temps'
         BoxLayout:

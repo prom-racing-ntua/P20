@@ -23,10 +23,10 @@ Builder.load_string('''
                 size: self.size
                 radius: [20,0,0,20]
             Color:
-                rgba: 1,0,0,1
+                rgba: 1,1,1,0.8
             Line:
                 rectangle: self.x,self.y,self.width,self.height
-                width: 2
+                width: 1.25
     Label:
         text: "li"
         canvas.before:
@@ -37,10 +37,10 @@ Builder.load_string('''
                 size: self.size
                 radius: [0,0,0,0]
             Color:
-                rgba: 1,0,0,1
+                rgba: 1,1,1,0.8
             Line:
                 rectangle: self.x,self.y,self.width,self.height
-                width: 2
+                width: 1.25
     Label:
         text: "ri"
         canvas.before:
@@ -51,10 +51,10 @@ Builder.load_string('''
                 size: self.size
                 radius: [0,0,0,0]
             Color:
-                rgba: 1,0,0,1
+                rgba: 1,1,1,0.8
             Line:
                 rectangle: self.x,self.y,self.width,self.height
-                width: 2
+                width: 1.25
     Label:
         text: "ro"
         canvas.before:
@@ -65,10 +65,10 @@ Builder.load_string('''
                 size: self.size
                 radius: [0,20,20,0]
             Color:
-                rgba: 1,0,0,1
+                rgba: 1,1,1,0.8
             Line:
                 rectangle: self.x,self.y,self.width,self.height
-                width: 2
+                width: 1.25
 ''')
 
 class Tire(BoxLayout):
