@@ -16,14 +16,15 @@ from flashing_arrows import Flashing_Arrows
 class Tire_Temps(FloatLayout):
     def __init__(self, **kwargs):
         super(Tire_Temps, self).__init__(**kwargs)
-        print(self.pos_hint, self.size_hint)
-        self.fl = Tire(pos_hint={"x": 0, "y": 0.55}, size_hint=(0.45, 0.45))
-        self.fr = Tire(pos_hint={"x": 0.55, "y": 0.55}, size_hint=(0.45, 0.45))
-        self.rl = Tire(pos_hint={"x": 0, "y": 0}, size_hint=(0.45, 0.45))
-        self.rr = Tire(pos_hint={"x": 0.55, "y": 0}, size_hint=(0.45, 0.45))
+        self.desc = Label(text="Tire Temps", pos_hint={"x": 0.4, "y": 0.9}, size_hint=(0.2, 0.1))
+        self.fl = Tire(pos_hint={"x": 0, "y": 0.5}, size_hint=(0.4, 0.47))
+        self.fr = Tire(pos_hint={"x": 0.6, "y": 0.5}, size_hint=(0.4, 0.47))
+        self.rl = Tire(pos_hint={"x": 0, "y": 0}, size_hint=(0.4, 0.47))
+        self.rr = Tire(pos_hint={"x": 0.6, "y": 0}, size_hint=(0.4, 0.47))
         
-        self.arr = Flashing_Arrows(pos_hint={"x": 0.45, "y": 0}, size_hint=(0.1, 1))
-
+        self.arr = Flashing_Arrows(pos_hint={"x": 0.45, "y": 0}, size_hint=(0.1, 0.9))
+        
+        self.add_widget(self.desc)
         self.add_widget(self.fl)
         self.add_widget(self.fr)
         self.add_widget(self.rl)
