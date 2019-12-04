@@ -57,9 +57,10 @@ class Battery(FloatLayout):
     def _after_init(self, dt):
         print(self.seg)
         print(self.lbl.text)
+        new_bat = self.seg
         for i in range(7):
             new_seg = Segment(seg_id=str(i), voltage=50, temp=40)
-            self.seg.add_widget(new_seg)
+            new_bat.add_widget(new_seg)
             print("added new segment")
-        #self.add_widget(self.seg)
+        self.seg = new_bat 
 

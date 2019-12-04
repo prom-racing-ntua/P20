@@ -9,11 +9,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ListProperty, NumericProperty
 
-Builder.load_string('''
-<Segment>:
-    Label:
-        text: "smt"
-''')
+
 
 
 class Segment(FloatLayout):
@@ -23,3 +19,10 @@ class Segment(FloatLayout):
 
     def __init__(self, **kwargs):
         super(Segment, self).__init__(**kwargs)
+        self.voltage_box = BoxLayout(orientation='vertical', pos_hint = {"x": 0, "y": 0.25}, size_hint = (1, 0.75))
+        for i in range(7):
+            self.voltage_box.add_widget(Label(text = str(i)))
+        self.add_widget(self.voltage_box)
+        self.temp_box = BoxLayout(orientation='horizontal', pos_hint = {"x": 0, "y": 0}, size_hint = (1, 0.25))
+
+
