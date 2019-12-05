@@ -25,7 +25,7 @@ Builder.load_string('''
             Color:
                 rgba: 1,1,1,0.8
             Line:
-                rectangle: self.x,self.y,self.width,self.height
+                rounded_rectangle: self.x, self.y, self.width, self.height, 20, 0, 0, 20
                 width: 1.25
     Label:
         text: "li"
@@ -67,7 +67,7 @@ Builder.load_string('''
             Color:
                 rgba: 1,1,1,0.8
             Line:
-                rectangle: self.x,self.y,self.width,self.height
+                rounded_rectangle: self.x, self.y, self.width, self.height, 0, 20, 20, 0
                 width: 1.25
 ''')
 

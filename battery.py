@@ -28,7 +28,7 @@ Builder.load_string('''
         size_hint: 1, 0.75
         canvas:
             Color:
-                rgba: 0,1,0,1
+                rgba: 1,1,1,1
             Line:
                 rectangle: self.x,self.y,self.width,self.height
                 width: 1.25
@@ -55,8 +55,7 @@ class Battery(FloatLayout):
         Clock.schedule_once(self._after_init, 0.1)
 
     def _after_init(self, dt):
-        print(self.seg)
-        print(self.lbl.text)
+        self.seg.spacing = 5
         new_bat = self.seg
         for i in range(7):
             new_seg = Segment(seg_id=str(i), voltage=50, temp=40)
