@@ -1,3 +1,4 @@
+#library imports
 from kivy.core.window import Window
 import kivy
 kivy.require("1.10.1")
@@ -9,8 +10,7 @@ from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
 
-#kv = Builder.load_file("tire_temps.kv")
-
+#custom class imports
 from left import Left
 from middle import Middle
 from right import Right

@@ -1,3 +1,4 @@
+#library imports
 import kivy
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
@@ -8,6 +9,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 
+#custom class imports
 from tire_temps import Tire_Temps
 from battery import Battery
 
