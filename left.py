@@ -12,6 +12,7 @@ from kivy.lang import Builder
 #custom class imports
 from tire_temps import Tire_Temps
 from battery import Battery
+from battery_graph import Battery_Graph
 
 Builder.load_string('''
 <Left>:
@@ -22,12 +23,15 @@ Builder.load_string('''
     Tire_Temps:
         pos_hint: {"bottom":1, "left":0.95}
         size_hint: 1, 0.3
-    Battery:
-        pos_hint: {"x":0, "y":0.32}
-        size_hint: 1, 0.5
+    #Battery_Graph:
+        #pos_hint: {"x":0, "y":0.32}
+        #size_hint: 1, 0.5
+        #points: [(0,588),(5,548),(10,500),(15,452)]
 ''')
 
 class Left(FloatLayout):
     def __init__(self, **kwargs):
         super(Left, self).__init__(**kwargs)
+        self.battery = Battery_Graph(pos_hint={"x":0, "y":0.32}, size_hint=(1, 0.5), points=[(0,588),(5,548),(10,500),(15,452)])
+        self.add_widget(self.battery)
 
