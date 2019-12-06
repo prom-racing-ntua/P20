@@ -7,20 +7,24 @@ from kivy.properties import StringProperty, ListProperty, NumericProperty, Objec
 from kivy.graphics import Color, Rectangle, Canvas, Line
 from kivy.uix.boxlayout import BoxLayout
 
-class Battery_Graph(Graph, BoxLayout):
+class Battery_Graph(BoxLayout):
     points = ListProperty()
 
     def __init__(self, **kwargs):
         super(Battery_Graph, self).__init__(**kwargs)
-        self.graph = Graph(xlabel='Time', ylabel='Voltage',
+        print(self.pos_hint, self.size_hint)
+        self.graph = Graph(xlabel='Time(mins)', ylabel='Voltage(V)',
                            x_ticks_major=10, y_ticks_major=50,
-                           y_grid_label=True, x_grid_label=True, padding=5,
+                           y_grid_label=True, x_grid_label=True,
                            x_grid=True, y_grid=True, xmin=0, xmax=50, ymin=300, ymax=600)
         self.plot = MeshLinePlot(color=[0,1,0,1])
         self.plot.points = self.points
         self.graph.add_plot(self.plot)
         print(self.points)
         self.add_widget(self.graph)
+    
+    def _update(self, **kwargs):
+        pass
 
 
         
