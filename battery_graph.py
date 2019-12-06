@@ -12,7 +12,6 @@ class Battery_Graph(BoxLayout):
 
     def __init__(self, **kwargs):
         super(Battery_Graph, self).__init__(**kwargs)
-        print(self.pos_hint, self.size_hint)
         self.graph = Graph(xlabel='Time(mins)', ylabel='Voltage(V)',
                            x_ticks_major=10, y_ticks_major=50,
                            y_grid_label=True, x_grid_label=True,
@@ -20,7 +19,6 @@ class Battery_Graph(BoxLayout):
         self.plot = MeshLinePlot(color=[0,1,0,1])
         self.plot.points = self.points
         self.graph.add_plot(self.plot)
-        print(self.points)
         self.add_widget(self.graph)
     
     def _update(self, **kwargs):
