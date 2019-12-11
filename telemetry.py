@@ -9,6 +9,8 @@ from kivy.graphics import Color, Rectangle, Canvas
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
+from kivy.config import Config
+
 
 #custom class imports
 from left import Left
@@ -19,7 +21,9 @@ class MainScreen(App):
 
     def build(self):
         Window.clearcolor = (0, 0, 0, 1)
-        Window.fullscreen = False
+        #in order to launch maximized
+        Window.fullscreen = 'auto'
+
         mainscreen = GridLayout()
         mainscreen.cols = 3
         left = Left()

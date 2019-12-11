@@ -10,27 +10,17 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 
 #custom class imports
-from tabs import Tabs
-
-
-Builder.load_string('''
-<Middle>:
-    canvas.before:
-        Color:
-            rgba: 1,0,0,1
-        Line:
-            rectangle: self.x, self.y, self.width, self.height
-    Label:
-        pos_hint: {"top":1, "x":0.3}
-        size_hint: 0.2, 0.1
-        text: "middle"
-    Tabs:
-        pos_hint: {"top": .9, "x": 0}
-        size_hint: 1, 0.7
-''')
-
+from parametric_bar import Parametric_Bar
 
 
 class Middle(FloatLayout):
     def __init__(self, **kwargs):
         super(Middle, self).__init__(**kwargs)
+
+        #setting up widgets
+        self.tps = Parametric_Bar(pos_hint={"x":0.05, "y":0.85}, size_hint=(0.2, 0.13), name="TPS(%)", value=30, max_value=100, color=[0,1,0,1], orientation="vertical")
+        self.brake = Parametric_Bar(pos_hint={"x":0.3, "y":0.85}, size_hint=(0.2, 0.13), name="Brake(%)", value=5, max_value=100, color=[1,0,0,1], orientation="vertical")
+
+        #adding widgets
+        self.add_widget(self.tps)
+        self.add_widget(self.brake)

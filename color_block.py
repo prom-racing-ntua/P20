@@ -17,6 +17,12 @@ Builder.load_string('''
 
 
 class Color_Block(Widget):
+    """A widget representing a solid colored rectangle \n
+        Type:Widget
+    \n
+    Parameters: \n
+        color: ColorProperty(list of 3 or 4 floats between (0.0-1.0) representing [red,green,blue,alpha])
+    """
     color = ColorProperty()
     def __init__(self, **kwargs):
         super(Color_Block, self).__init__(**kwargs)
