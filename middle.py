@@ -11,6 +11,7 @@ from kivy.lang import Builder
 
 #custom class imports
 from parametric_bar import Parametric_Bar
+from pc_status import  Pc_Status
 
 
 class Middle(FloatLayout):
@@ -18,9 +19,11 @@ class Middle(FloatLayout):
         super(Middle, self).__init__(**kwargs)
 
         #setting up widgets
-        self.tps = Parametric_Bar(pos_hint={"x":0.05, "y":0.85}, size_hint=(0.2, 0.13), name="TPS(%)", value=30, max_value=100, color=[0,1,0,1], orientation="vertical")
-        self.brake = Parametric_Bar(pos_hint={"x":0.3, "y":0.85}, size_hint=(0.2, 0.13), name="Brake(%)", value=5, max_value=100, color=[1,0,0,1], orientation="vertical")
+        self.pc_status = Pc_Status(pos_hint={"x":0.05, "y":0.85}, size_hint=(1, 0.15))
+        self.tps = Parametric_Bar(pos_hint={"x":0.05, "y":0.35}, size_hint=(0.2, 0.13), name="TPS(%)", value=30, max_value=100, color=[0,1,0,1], orientation="vertical")
+        self.brake = Parametric_Bar(pos_hint={"x":0.3, "y":0.35}, size_hint=(0.2, 0.13), name="Brake(%)", value=5, max_value=100, color=[1,0,0,1], orientation="vertical")
 
         #adding widgets
+        self.add_widget(self.pc_status)
         self.add_widget(self.tps)
         self.add_widget(self.brake)
