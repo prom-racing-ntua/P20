@@ -20,9 +20,12 @@ class Battery_Graph(BoxLayout):
         self.plot.points = self.points
         self.graph.add_plot(self.plot)
         self.add_widget(self.graph)
+
+        #self.bind(points=self._update)
     
     def _update(self, **kwargs):
-        pass
+        print("graph")
+        self.plot.points.append(self.points)
 
 
         
