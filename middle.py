@@ -22,8 +22,10 @@ class Middle(FloatLayout):
         self.pc_status = Pc_Status(pos_hint={"x":0.05, "y":0.85}, size_hint=(1, 0.15))
         self.tps = Parametric_Bar(pos_hint={"x":0.05, "y":0.35}, size_hint=(0.2, 0.13), name="TPS(%)", value=30, max_value=100, color=[0,1,0,1], orientation="vertical")
         self.brake = Parametric_Bar(pos_hint={"x":0.3, "y":0.35}, size_hint=(0.2, 0.13), name="Brake(%)", value=5, max_value=100, color=[1,0,0,1], orientation="vertical")
+        self.bias = Parametric_Bar(pos_hint={"x":0.05, "y":0.15}, size_hint=(0.4, 0.05), name="Brake Bias(%)", value=10, max_value=100, color=[1,0,1,1], orientation="horizontal")
 
         #adding widgets
         self.add_widget(self.pc_status)
         self.add_widget(self.tps)
         self.add_widget(self.brake)
+        self.add_widget(self.bias)

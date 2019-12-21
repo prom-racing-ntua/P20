@@ -6,8 +6,7 @@ from kivy.properties import StringProperty, ListProperty, NumericProperty, Objec
 from kivy.graphics import Color, Rectangle, Canvas, Line
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
-import psutil
-
+#import psutil
 #custom class imports
 from color_block import Color_Block
 
@@ -31,6 +30,3 @@ class Pc_Battery(BoxLayout):
         for i in range(4, -1, -1):
             a = 0 if (4-i)*20 >= self.battery.percent else 1
             self.add_widget(Color_Block(color=[1,1,1,a]))
-        
-
-        
