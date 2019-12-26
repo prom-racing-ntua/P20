@@ -21,11 +21,14 @@ Builder.load_string('''
 class  Progress_Bar(BoxLayout):
     """A widget representing a progressbar consisting of 20 seperate pieces \n
         Type:BoxLayout
+        Uses Color_Block class
     \n
     Parameters: \n
         active_blocks: NumericProperty(how many out of 20 blocks will be lit)
         color: ColorProperty(list of 3 or 4 floats between (0.0-1.0) representing [red,green,blue,alpha])
-        orientation: OptionProperty inherited from BoxLayout, defaults to ‘horizontal’. Can be ‘vertical’ or ‘horizontal
+        orientation: OptionProperty inherited from BoxLayout, defaults to ‘horizontal’. Can be ‘vertical’ or ‘horizontal\n 
+    Update Functionality:
+        Changing the value of active blocks automatically updates the active color blocks
     """
     active_blocks = NumericProperty()
     color = ColorProperty()
@@ -35,11 +38,14 @@ class  Progress_Bar(BoxLayout):
 
         #widgets go in reverse
         for i in range(19, -1, -1):
-            a = 0 if i>=self.active_blocks else 1
-            self.color[3] = a
             self.add_widget(Color_Block(color=self.color))
+        self.bind(active_blocks=self.update_active)
 
-        
-
+    def update_active(self, obj, value):
+        s = value
+        for i in self.children:
+            a = 1 if s>0 else 0
+            i.opacity = a
+            s -= 1
         
 

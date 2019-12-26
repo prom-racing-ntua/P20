@@ -28,7 +28,7 @@ class MainScreen(App):
     def build(self):
         Window.clearcolor = (0, 0, 0, 1)
         #in order to launch maximized
-        Window.fullscreen = False
+        Window.fullscreen = 'auto'
 
         mainscreen = GridLayout()
         mainscreen.cols = 3

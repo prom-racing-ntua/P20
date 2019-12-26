@@ -14,10 +14,10 @@ Builder.load_string('''
     name: self.name
     orientation: "horizontal"
     Label:
-        text: "lo"
+        text: str(root.temp[0])
         canvas.before:
             Color:
-                rgba: 0,0,1,1
+                rgba: root.colors[0]
             RoundedRectangle:
                 pos: self.x, self.y
                 size: self.size
@@ -28,10 +28,10 @@ Builder.load_string('''
                 rounded_rectangle: self.x, self.y, self.width, self.height, 20, 0, 0, 20
                 width: 1.25
     Label:
-        text: "li"
+        text: str(root.temp[1])
         canvas.before:
             Color:
-                rgba: 0,1,0,1
+                rgba: root.colors[1]
             RoundedRectangle:
                 pos: self.x, self.y
                 size: self.size
@@ -42,10 +42,10 @@ Builder.load_string('''
                 rectangle: self.x,self.y,self.width,self.height
                 width: 1.25
     Label:
-        text: "ri"
+        text: str(root.temp[2])
         canvas.before:
             Color:
-                rgba: 0,1,0,1
+                rgba: root.colors[2]
             RoundedRectangle:
                 pos: self.x, self.y
                 size: self.size
@@ -56,10 +56,10 @@ Builder.load_string('''
                 rectangle: self.x,self.y,self.width,self.height
                 width: 1.25
     Label:
-        text: "ro"
+        text: str(root.temp[3])
         canvas.before:
             Color:
-                rgba: 0,1,0,1
+                rgba: root.colors[3]
             RoundedRectangle:
                 pos: self.x, self.y
                 size: self.size
@@ -74,9 +74,12 @@ Builder.load_string('''
 class Tire(BoxLayout):
     name = StringProperty()
     temp = ListProperty()
+    colors = ListProperty(defaultvalue = [[0,0,1,1], [0,0,1,1], [0,0,1,1], [0,0,1,1]]) 
 
     def __init__(self,x=None,y=None, **kwargs):
         super(Tire, self).__init__(**kwargs)
+
+        #need to match colors to temp
         
 
 

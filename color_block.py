@@ -22,6 +22,7 @@ class Color_Block(Widget):
     \n
     Parameters: \n
         color: ColorProperty(list of 3 or 4 floats between (0.0-1.0) representing [red,green,blue,alpha])
+        opacity: set opacity to 1 to activate or to 0 to deactivate
     """
     color = ColorProperty()
     def __init__(self, **kwargs):
