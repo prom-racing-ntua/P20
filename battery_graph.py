@@ -2,7 +2,7 @@
 import kivy
 from kivy.app import App
 from kivy.uix.widget import Widget
-from kivy.garden.graph import Graph, MeshLinePlot
+from kivy_garden.graph import Graph, MeshLinePlot
 from kivy.properties import StringProperty, ListProperty, NumericProperty, ObjectProperty
 from kivy.graphics import Color, Rectangle, Canvas, Line
 from kivy.uix.boxlayout import BoxLayout
