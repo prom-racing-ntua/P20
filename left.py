@@ -26,12 +26,12 @@ class Left(FloatLayout):
         self.data = [600,0]
 
         #setting up widgets
-        self.tire_temps = Tire_Temps(pos_hint={"bottom": 1, "left": 0.95}, size_hint=(1, 0.3))
+        self.tire_temps = Tire_Temps(pos_hint={"x": 0.05, "y": 0}, size_hint=(1, 0.3), temps=[[50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50]])
         self.battery = Battery_Graph(pos_hint={"x":0, "y":0.32}, size_hint=(1, 0.5), points=[(600,0)])
         self.kw = Parametric_Bar(pos_hint={"x":0.05, "y":0.85}, size_hint=(0.2, 0.13), name="Power(kW)", value=50, max_value=100, color=[0,0,1,1], orientation="vertical")
         self.cur = Parametric_Bar(pos_hint={"x":0.3, "y":0.85}, size_hint=(0.2, 0.13), name="Current(A)", value=0, max_value=100, color=[0,0,1,1], orientation="vertical")
         self.vol = Parametric_Bar(pos_hint={"x":0.55, "y":0.85}, size_hint=(0.2, 0.13), name="Voltage(V)", value=100, max_value=100, color=[0,0,1,1], orientation="vertical")
-        
+
         #adding widgets
         self.add_widget(self.battery)
         self.add_widget(self.tire_temps)

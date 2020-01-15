@@ -25,8 +25,8 @@ class Middle(FloatLayout):
         self.tps = Parametric_Bar(pos_hint={"x":0.05, "y":0.35}, size_hint=(0.2, 0.13), name="TPS(%)", value=30, max_value=100, color=[0,1,0,1], orientation="vertical")
         self.brake = Parametric_Bar(pos_hint={"x":0.3, "y":0.35}, size_hint=(0.2, 0.13), name="Brake(%)", value=5, max_value=100, color=[1,0,0,1], orientation="vertical")
         self.bias = Parametric_Bar(pos_hint={"x":0.05, "y":0.15}, size_hint=(0.4, 0.05), name="Brake Bias(%)", value=10, max_value=100, color=[1,0,1,1], orientation="horizontal")
-        self.rpmbar = RpmBar(pos_hint ={"x":0.05, "y":0.5},size_hint= (0.8, 0.13), name = "Rpm(%)", value=8500, max_value=10000, color=[1,0,0,1])
-        self.motor_temp = Icon_Indicator(pos_hint ={"x":0.5, "y":0}, size_hint= (0.5, 0.4), name = "Motor Temp", value = 50, source = "assets/motor.png")
+        self.rpmbar = RpmBar(pos_hint ={"x":0.05, "y":0.5},size_hint= (0.8, 0.05), value=8500, max_value=10000, color=[1,0,0,1])
+        self.motor_temp = Icon_Indicator(pos_hint ={"x":0.5, "y":0}, size_hint= (0.5, 0.4), name = "Motor Temp", value = 50, source = "assets/gear.png")
         
         #adding widgets
         self.add_widget(self.pc_status)
@@ -35,4 +35,13 @@ class Middle(FloatLayout):
         self.add_widget(self.bias)
         self.add_widget(self.rpmbar)
         self.add_widget(self.motor_temp)
+
+        #for testing
+        Clock.schedule_interval(self.rpm, 0.1)
+
+    #for testing, steady
+    def rpm(self, dt):
+        if self.rpmbar.value>9900:
+            self.rpmbar.value = 1000
+        self.rpmbar.value += 1000
 

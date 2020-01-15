@@ -6,7 +6,7 @@ from kivy.properties import StringProperty, ListProperty, NumericProperty, Objec
 from kivy.graphics import Color, Rectangle, Canvas, Line
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
-#import psutil
+import psutil
 #custom class imports
 from color_block import Color_Block
 

@@ -8,6 +8,12 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import Color, Rectangle, Canvas, RoundedRectangle, Line
 from kivy.properties import StringProperty, ListProperty, NumericProperty
 
+cl = [[1, 0, 0], [1, 0.36, 0], [1, 0.73, 0], 
+    [0.91, 1, 0], [0.55, 1, 0], 
+    [0.18, 1, 0], [0, 1, 0.18], 
+    [0, 1, 0.55], [0, 1, 0.91], 
+    [0, 0.73, 1], [0, 0.36, 1], [0, 0, 1]]
+
 
 Builder.load_string('''
 <Tire>:
@@ -17,7 +23,7 @@ Builder.load_string('''
         text: str(root.temp[0])
         canvas.before:
             Color:
-                rgba: root.colors[0]
+                rgb: root.colors[0]
             RoundedRectangle:
                 pos: self.x, self.y
                 size: self.size
@@ -31,7 +37,7 @@ Builder.load_string('''
         text: str(root.temp[1])
         canvas.before:
             Color:
-                rgba: root.colors[1]
+                rgb: root.colors[1]
             RoundedRectangle:
                 pos: self.x, self.y
                 size: self.size
@@ -45,7 +51,7 @@ Builder.load_string('''
         text: str(root.temp[2])
         canvas.before:
             Color:
-                rgba: root.colors[2]
+                rgb: root.colors[2]
             RoundedRectangle:
                 pos: self.x, self.y
                 size: self.size
@@ -59,7 +65,7 @@ Builder.load_string('''
         text: str(root.temp[3])
         canvas.before:
             Color:
-                rgba: root.colors[3]
+                rgb: root.colors[3]
             RoundedRectangle:
                 pos: self.x, self.y
                 size: self.size
@@ -74,12 +80,16 @@ Builder.load_string('''
 class Tire(BoxLayout):
     name = StringProperty()
     temp = ListProperty()
-    colors = ListProperty(defaultvalue = [[0,0,1,1], [0,0,1,1], [0,0,1,1], [0,0,1,1]]) 
+    colors = ListProperty(defaultvalue = [[0,0,1], [0,0,1], [0,0,1], [0,0,1]]) 
 
     def __init__(self,x=None,y=None, **kwargs):
         super(Tire, self).__init__(**kwargs)
 
-        #need to match colors to temp
+        self.bind(temp=self.color_picker)
+
+    def color_picker(self, obj, value):
+        for i in range(4):
+            self.colors[i] = cl[round((150-self.temp[i])/12)]
         
 
 

@@ -10,7 +10,7 @@ from kivy.lang import Builder
 from datetime import datetime
 
 #custom class imports
-#from pc_battery import Pc_Battery
+from pc_battery import Pc_Battery
 
 Builder.load_string('''
 <Pc_Status>:
@@ -27,6 +27,6 @@ class Pc_Status(FloatLayout):
         super(Pc_Status, self).__init__(**kwargs)
         now = datetime.now()
         self.dt = Label(text=now.strftime("%x")+", "+now.strftime("%X"), pos_hint={"x":0, "y":0.1}, size_hint=(0.5, 0.8))
-        #self.battery = Pc_Battery(pos_hint={"x":0.85, "y":0.3}, size_hint=(0.2, 0.4))
+        self.battery = Pc_Battery(pos_hint={"x":0.85, "y":0.3}, size_hint=(0.2, 0.4))
         self.add_widget(self.dt)
-        #self.add_widget(self.battery)
+        self.add_widget(self.battery)

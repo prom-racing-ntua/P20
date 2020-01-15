@@ -8,12 +8,28 @@ from kivy.uix.widget import Widget
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
-from time_table import Time_Table
+from kivy.clock import Clock
+import random
 
+
+#custom class imports
+from accel import Accel
+from time_table import Time_Table
 
 
 class Right(FloatLayout):
     def __init__(self, **kwargs):
         super(Right, self).__init__(**kwargs)
-        self.table = Time_Table(pos_hint = {'x':0,'y':0.5}, size_hint = (1,0.5)  )
+        self.table = Time_Table(pos_hint = {'x':0,'y':0.5}, size_hint = (1,0.5))
+        self.accel = Accel(pos_hint = {'x':0,'y':0.1}, size_hint = (0.7,0.4), acc=[50,50])
         self.add_widget(self.table)
+        self.add_widget(self.accel)
+
+        #for testing
+        Clock.schedule_interval(self.acc_test, 0.5)
+
+    #for testing, random
+    def acc_test(self, dt):
+        self.accel.acc = [random.randint(0,100), random.randint(0,100)]
+
+
