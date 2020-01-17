@@ -21,12 +21,12 @@ class Right(FloatLayout):
     def __init__(self, **kwargs):
         super(Right, self).__init__(**kwargs)
         self.table = Time_Table(pos_hint = {'x':0,'y':0.5}, size_hint = (1,0.5))
-        self.accel = Accel(pos_hint = {'x':0,'y':0.1}, size_hint = (0.7,0.4), acc=[50,50])
+        self.accel = Accel(pos_hint = {'x':0.3,'y':0.1}, size_hint = (0.7,0.4), acc=[50,50])
         self.add_widget(self.table)
         self.add_widget(self.accel)
 
         #for testing
-        Clock.schedule_interval(self.acc_test, 0.5)
+        #Clock.schedule_interval(self.acc_test, 0.5)
 
     #for testing, random
     def acc_test(self, dt):
