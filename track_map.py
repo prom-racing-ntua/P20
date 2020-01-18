@@ -9,7 +9,7 @@ Builder.load_string("""
 <Track_map>:
     canvas:
         Color:
-            rgb: 0.1,0.1,0.1
+            rgb: .5,.5,.5
         Rectangle:
             pos: self.pos
             size: self.size
