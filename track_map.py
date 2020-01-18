@@ -14,6 +14,8 @@ Builder.load_string("""
             pos: self.pos
             size: self.size
             source: "./assets/Tracklayout.png"
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
 """)
 
 class Track_map(FloatLayout):
