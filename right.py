@@ -24,7 +24,7 @@ class Right(FloatLayout):
         self.accel = Accel(pos_hint = {'x':0.6,'y':0.25}, size_hint = (0.4,0.25), acc=[50,50])
         self.add_widget(self.table)
         self.add_widget(self.accel)
-        self.map = Track_map(pos_hint = {'x':0.1, 'y':0.1}, size_hint = (0.5, 0.4))
+        self.map = Track_map(pos_hint = {'x':0.1, 'y':0.099}, size_hint = (0.5, 0.4))
         self.add_widget(self.map)
         #for testing
         #Clock.schedule_interval(self.acc_test, 0.5)
