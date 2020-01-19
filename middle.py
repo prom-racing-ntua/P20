@@ -44,7 +44,7 @@ class Middle(FloatLayout):
         self.add_widget(self.hall_speed)
 
         #for testing
-        Clock.schedule_interval(self.rpm, 0.5)
+        Clock.schedule_interval(self.rpm, 0.05)
 
     #for testing, steady
     def rpm(self, dt):

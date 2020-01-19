@@ -26,10 +26,10 @@ class Right(FloatLayout):
         self.add_widget(self.accel)
 
         #for testing
-        #Clock.schedule_interval(self.acc_test, 0.5)
+        Clock.schedule_interval(self.acc_test, 0.2)
 
     #for testing, random
     def acc_test(self, dt):
-        self.accel.acc = [random.randint(0,100), random.randint(0,100)]
+        self.accel.acc = [self.accel.acc[0]+random.randint(-10,10), self.accel.acc[1]+random.randint(-10,10)]
 
 
