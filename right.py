@@ -15,7 +15,7 @@ import random
 #custom class imports
 from accel import Accel
 from time_table import Time_Table
-from track_map import Track_map
+from trackmap import TrackMap
 
 class Right(FloatLayout):
     def __init__(self, **kwargs):
@@ -24,7 +24,7 @@ class Right(FloatLayout):
         self.accel = Accel(pos_hint = {'x':0.6,'y':0.25}, size_hint = (0.4,0.25), acc=[50,50])
         self.add_widget(self.table)
         self.add_widget(self.accel)
-        self.map = Track_map(pos_hint = {'x':0.1, 'y':0.099}, size_hint = (0.5, 0.4))
+        self.map = TrackMap(pos_hint = {'x':0.099, 'y':0.2482}, size_hint = (0.5, 0.25))
         self.add_widget(self.map)
         #for testing
         Clock.schedule_interval(self.acc_test, 0.2)
@@ -32,5 +32,6 @@ class Right(FloatLayout):
     #for testing, random
     def acc_test(self, dt):
         self.accel.acc = [self.accel.acc[0]+random.randint(-10,10), self.accel.acc[1]+random.randint(-10,10)]
+
 
 
