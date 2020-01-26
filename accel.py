@@ -51,7 +51,7 @@ class Accel(FloatLayout):
     def update(self, obj, value):
         anim = Animation(opacity=0)
         if self.previous is not None:
-            self.previous.opacity = 0.8
+            self.previous.opacity = 0.7
             anim.start(self.previous)
             anim.bind(on_complete=self.remove)
 
