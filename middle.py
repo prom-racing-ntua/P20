@@ -18,6 +18,8 @@ from rpmbar import RpmBar
 from icon_indicator import Icon_Indicator
 from parametric_label import Parametric_Label
 from brake_bias import Brake_Bias
+from tire_temps import Tire_Temps
+
 
 class Middle(FloatLayout):
     def __init__(self, **kwargs):

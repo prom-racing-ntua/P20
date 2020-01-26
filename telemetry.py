@@ -20,6 +20,7 @@ import random
 from left import Left
 from middle import Middle
 from right import Right
+from main import Main
 
 class MainScreen(App):
     data = ListProperty()
@@ -30,21 +31,20 @@ class MainScreen(App):
         #in order to launch maximized
         Window.fullscreen = 'auto'
 
-        mainscreen = GridLayout()
-        mainscreen.cols = 3
+        mainscreen = Main()
 
         self.timestamp = 0
 
-        self.left = Left()
-        self.middle = Middle()
-        self.right = Right()
+        #self.left = Left()
+        #self.middle = Middle()
+        #self.right = Right()
 
-        self.data = [600,0]
-        self.data = [600,0]
+        #self.data = [600,0]
+        #self.data = [600,0]
 
-        mainscreen.add_widget(self.left)
-        mainscreen.add_widget(self.middle)
-        mainscreen.add_widget(self.right)
+        #mainscreen.add_widget(self.left)
+        #mainscreen.add_widget(self.middle)
+        #mainscreen.add_widget(self.right)
 
         #testing the backend
         #Clock.schedule_interval(self.get_data, 1)

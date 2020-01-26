@@ -14,7 +14,6 @@ from kivy.clock import Clock
 
 #custom class imports
 from tire_temps import Tire_Temps
-from battery import Battery
 from battery_graph import Battery_Graph
 from parametric_bar import Parametric_Bar
 

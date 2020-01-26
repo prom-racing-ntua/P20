@@ -17,7 +17,6 @@ import random
 
 #custom class imports
 from tire import Tire
-#from flashing_arrows import Flashing_Arrows
 from progress_bar import Progress_Bar
 
 
@@ -37,17 +36,15 @@ class Tire_Temps(FloatLayout):
     def __init__(self, **kwargs):
         
         super(Tire_Temps, self).__init__(**kwargs)
-        #self.desc = Label(text="Tire Temps", pos_hint={"x": 0.4, "y": 0.9}, size_hint=(0.2, 0.1))
-        self.fl = Tire(pos_hint={"x": 0, "y": 0.5}, size_hint=(0.4, 0.47), temp = [50,50,50,50])
-        self.fr = Tire(pos_hint={"x": 0.6, "y": 0.5}, size_hint=(0.4, 0.47), temp = [50,50,50,50])
-        self.rl = Tire(pos_hint={"x": 0, "y": 0}, size_hint=(0.4, 0.47), temp = [50,50,50,50])
-        self.rr = Tire(pos_hint={"x": 0.6, "y": 0}, size_hint=(0.4, 0.47), temp = [50,50,50,50])
-        self.fll = Progress_Bar(pos_hint={"x": 0.42, "y": 0.5}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
-        self.frl = Progress_Bar(pos_hint={"x": 0.52, "y": 0.5}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
-        self.rll = Progress_Bar(pos_hint={"x": 0.42, "y": 0}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
-        self.rrl = Progress_Bar(pos_hint={"x": 0.52, "y": 0}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
+        self.fl = Tire(pos_hint={"x": 0, "y": 0.5}, size_hint=(0.2, 0.47), temp = [50,50,50,50])
+        self.fr = Tire(pos_hint={"x": 0.8, "y": 0.5}, size_hint=(0.2, 0.47), temp = [50,50,50,50])
+        self.rl = Tire(pos_hint={"x": 0, "y": 0}, size_hint=(0.2, 0.47), temp = [50,50,50,50])
+        self.rr = Tire(pos_hint={"x": 0.8, "y": 0}, size_hint=(0.2, 0.47), temp = [50,50,50,50])
+        self.fll = Progress_Bar(pos_hint={"x": 0.22, "y": 0.5}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
+        self.frl = Progress_Bar(pos_hint={"x": 0.73, "y": 0.5}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
+        self.rll = Progress_Bar(pos_hint={"x": 0.22, "y": 0}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
+        self.rrl = Progress_Bar(pos_hint={"x": 0.73, "y": 0}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
         
-        #self.arr = Flashing_Arrows(pos_hint={"x": 0.45, "y": 0}, size_hint=(0.1, 0.9))
         
         #self.add_widget(self.desc)
         self.add_widget(self.fl)

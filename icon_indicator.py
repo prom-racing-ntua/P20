@@ -11,25 +11,22 @@ Builder.load_string('''
 <Icon_Indicator>:
     Image:
         #id: img
-        #size_hint: 0.6,1
         pos_hint: {"x":0,"y":0}
         source: root.source
-        color: [1,0,0,1]
+        color: root.color
         #opacity: 1
     Label:
-        #id: name
-        size_hint: 0.4,0.5
-        pos_hint: {"x":0.3,"y":0.4}
+        size_hint: 0.4,0.2
+        pos_hint: {"x":0.3,"y":0}
         text: root.name
         font_size: "16sp"
-        color: [0,1,0,1]
+        color: [1,1,1,1]
     Label:
-        id: value
         size_hint: 0.4,0.5
-        pos_hint: {"x":0.3,"y":0.2}
-        text: str(root.value)
+        pos_hint: {"x":0.3,"y":0.25}
+        text: str(root.value)+"°C"
         font_size: "24sp"
-        color: [0,1,0,1]
+        color: root.color
 ''')
 
 
@@ -38,6 +35,7 @@ class Icon_Indicator(FloatLayout):
     source = StringProperty()
     name = StringProperty()
     color = ColorProperty()
+    boundaries = ListProperty()
 
     def __init__(self, **kwargs):
         super(Icon_Indicator, self).__init__(**kwargs)
