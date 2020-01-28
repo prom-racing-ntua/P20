@@ -33,6 +33,14 @@ class MainScreen(App):
 
         mainscreen = Main()
 
+        x = 1
+        y = 1
+
+        print("test", x & y)
+        print(self.bits)
+
+
+
         self.timestamp = 0
 
         #self.left = Left()

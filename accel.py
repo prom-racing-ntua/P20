@@ -18,7 +18,7 @@ Builder.load_string('''
         Rectangle:
             pos: self.pos
             size: self.size
-            source: "assets/scope2.png"
+            source: "assets/scope.png"
         Color:
             rgba: 1,1,1,0.5
         Line:
