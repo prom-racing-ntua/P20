@@ -2,7 +2,6 @@
 import kivy
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.relativelayout import RelativeLayout
 from kivy.graphics import Color, Rectangle, Canvas, Line
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
