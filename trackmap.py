@@ -2,14 +2,18 @@
 from kivy.lang import Builder
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.graphics import Rectangle, Color, Canvas, Line
-from kivy.uix.label import Label
 from kivy.properties import NumericProperty, ListProperty, ColorProperty, StringProperty
-from kivy.uix.image import Image
 import math
+from kivy.core.window import Window
 
 Builder.load_string("""
-<TrackMap>:   
+<TrackMap>: 
     canvas:
+        # Color:
+        #     rgba: 1, 1, 1, 1
+        # Line:
+        #     rectangle: self.x,self.y,self.width,self.height
+        #     width: 1.5
         Color:
             rgba: self.color
         Line:
@@ -28,7 +32,7 @@ class TrackMap(RelativeLayout):
     def __init__(self, **kwargs):
         super(TrackMap, self).__init__(**kwargs)
         earth_radius=6367116
-
+        
         file = open(self.trackfile, "r")
         cosf0 = math.cos(math.radians(float(file.readline().split(',')[1]))) # used to approximate x and y coords to 1:1 aspect ratio
         longs=[]
@@ -42,11 +46,13 @@ class TrackMap(RelativeLayout):
         minx = min(longs)
         maxy = max(lats)
         miny = min(lats)
-        scalex = 2 * self.width / (maxx - minx) 
-        scaley = 2.4 * self.height / (maxy - miny)
+        sizex = self.size_hint[0] * Window.width
+        sizey = self.size_hint[1] * Window.height
+        scalex = sizex / (maxx - minx)
+        scaley = sizey / (maxy - miny)
         for i in range(len(longs)):
-            self.coords.append(self.y + scaley * (lats[i]-miny))
-            self.coords.append(self.x + scalex * (longs[i]-minx))
+            self.coords.append(scaley * abs(lats[i]-miny))
+            self.coords.append(scalex * abs(longs[i]-minx))
             
 # for converting geo_coords to x and y check this : https://stackoverflow.com/questions/16266809/convert-from-latitude-longitude-to-x-y
 # and : https://en.wikipedia.org/wiki/Equirectangular_projection
