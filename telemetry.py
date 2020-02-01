@@ -32,7 +32,7 @@ from dashboard import Dashboard
 from left import Left
 from middle import Middle
 from right import Right
-
+from drs_button import Drs_Button
 
 Builder.load_string("""
 <Main>: 
@@ -89,16 +89,7 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         #in order to launch maximized
         Window.fullscreen = 'auto'
-        
-        mainscreen = Main()
-
-        x = 1
-        y = 1
-
-        print("test", x & y)
-        #print(self.bits)
-
-
+        Main()
 
         self.timestamp = 0
 
@@ -148,7 +139,7 @@ class Main(Screen):
         self.gps_speed = Parametric_Label(pos_hint={"x":0.58, "y":0.65}, size_hint=(0.1, 0.13), name1="50", name2="GPS Speed", font1="32sp")
         self.hall_speed = Parametric_Label(pos_hint={"x":0.65, "y":0.65}, size_hint=(0.1, 0.13), name1="50", name2="Sensor Speed", font1="32sp")
         self.dashboard = Dashboard(pos_hint={"x":0.03, "y":0.05}, size_hint=(0.1, 0.2))
-
+        self.drs_button = Drs_Button(pos_hint= {"right" : 1, "y": 0.2}, size_hint=(0.05, 0.05))
 
         #adding widgets
         self.add_widget(self.battery)
@@ -170,6 +161,7 @@ class Main(Screen):
         self.add_widget(self.gps_speed)
         self.add_widget(self.hall_speed)
         self.add_widget(self.dashboard)
+        self.add_widget(self.drs_button)
 
         #for testing
         Clock.schedule_interval(self.acc_test, 0.2)
