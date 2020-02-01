@@ -32,7 +32,7 @@ from dashboard import Dashboard
 from left import Left
 from middle import Middle
 from right import Right
-#from drs_button import Drs_Button
+from drs_button import Drs_Button
 from main import Main
 from data_screen import Data_Screen
 from diagnostics import Diagnostics
@@ -118,7 +118,6 @@ class MainScreen(App):
         self.data[1]+=1
         self.left.data[0]=self.data[0]
         self.left.data[1]=self.data[1]
-
 
 
 
