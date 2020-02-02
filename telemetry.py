@@ -13,7 +13,7 @@ from kivy.config import Config
 from kivy.uix.layout import Layout
 from kivy.clock import Clock
 from kivy.properties import StringProperty, ListProperty, NumericProperty
-from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
 import random
 
 #custom class imports
@@ -95,7 +95,8 @@ class MainScreen(App):
         #in order to launch maximized
         Window.fullscreen = 'auto'
         Main()
-
+        Window.bind(on_key_down=self.press)
+        
         self.timestamp = 0
 
         #self.left = Left()
@@ -118,9 +119,27 @@ class MainScreen(App):
         self.data[1]+=1
         self.left.data[0]=self.data[0]
         self.left.data[1]=self.data[1]
-
-
-
+    
+    def press(self, keyboard, keycode, text, modifiers, type):
+        if keycode == 275: # ascii codes for left, right and esc
+            if sm.current == 'main':
+                sm.transition = SlideTransition(direction="left")
+                sm.current = 'data'
+            elif sm.current == 'diagnostics':
+                sm.transition = SlideTransition(direction="left")
+                sm.current = 'main'
+        elif keycode == 276:
+            if sm.current == 'main':
+                sm.transition = SlideTransition(direction="right")
+                sm.current = 'diagnostics'
+            elif sm.current == 'data':
+                sm.transition = SlideTransition(direction="right")
+                sm.current = 'main'
+        elif keycode == 27:
+            App.stop(self)
+        return True
+        
+        
 sm = ScreenManager()
 sm.add_widget(Main(name='main'))
 sm.add_widget(Data_Screen(name='data'))
