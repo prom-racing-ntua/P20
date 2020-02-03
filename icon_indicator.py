@@ -24,7 +24,7 @@ Builder.load_string('''
     Label:
         size_hint: 0.4,0.5
         pos_hint: {"x":0.3,"y":0.25}
-        text: str(root.value)+"°C"
+        text: str(root.value)+root.unit
         font_size: "24sp"
         color: root.color
 ''')
@@ -32,6 +32,7 @@ Builder.load_string('''
 
 class Icon_Indicator(FloatLayout):
     value = NumericProperty()
+    unit = StringProperty()
     source = StringProperty()
     name = StringProperty()
     color = ColorProperty()
@@ -39,3 +40,4 @@ class Icon_Indicator(FloatLayout):
 
     def __init__(self, **kwargs):
         super(Icon_Indicator, self).__init__(**kwargs)
+        print(self.value)

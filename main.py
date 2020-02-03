@@ -54,13 +54,15 @@ class Main(Screen):
         self.brake = Parametric_Bar(pos_hint={"x":0.42, "y":0.65}, size_hint=(0.05, 0.13), name="Brake(%)", value=5, max_value=100, color=[1,0,0,1], orientation="vertical")
         self.bias = Brake_Bias(pos_hint={"x":0.35, "y":0.5}, size_hint=(0.1, 0.1), percentage = 50)
         self.rpmbar = RpmBar(pos_hint ={"x":0.35, "y":0.8},size_hint= (0.35, 0.05), value=8500, max_value=10000, color=[1,0,0,1])
-        self.motor_temp = Icon_Indicator(pos_hint={"x": 0.48, "y": 0.5}, size_hint=(0.1, 0.1), name="Motor Temp", value=50 , boundaries=[100,120], source="assets/gear.png", color=[1,1,1])
-        self.inv_temp = Icon_Indicator(pos_hint={"x": 0.58, "y": 0.5}, size_hint=(0.1, 0.1), name="Inverter Temp", value=50 , boundaries=[100,120], source="assets/inv.png", color=[1,1,1])
-        self.bat_temp = Icon_Indicator(pos_hint={"x": 0.68, "y": 0.5}, size_hint=(0.1, 0.1), name="Battery Temp", value=50 , boundaries=[100,120], source="assets/battery2.png", color=[1,1,1,0.1])
-        self.gps_speed = Parametric_Label(pos_hint={"x":0.58, "y":0.65}, size_hint=(0.1, 0.13), name1="50", name2="GPS Speed", font1="32sp")
-        self.hall_speed = Parametric_Label(pos_hint={"x":0.65, "y":0.65}, size_hint=(0.1, 0.13), name1="50", name2="Sensor Speed", font1="32sp")
+        self.motor_temp = Icon_Indicator(pos_hint={"x": 0.48, "y": 0.5}, size_hint=(0.1, 0.1), name="Motor Temp", value=50, unit="°C", boundaries=[100,120], source="assets/gear.png", color=[1,1,1])
+        self.inv_temp = Icon_Indicator(pos_hint={"x": 0.58, "y": 0.5}, size_hint=(0.1, 0.1), name="Inverter Temp", value=50, unit="°C" , boundaries=[100,120], source="assets/inv.png", color=[1,1,1])
+        self.bat_temp = Icon_Indicator(pos_hint={"x": 0.68, "y": 0.5}, size_hint=(0.1, 0.1), name="Battery Temp", value=50, unit="°C" , boundaries=[100,120], source="assets/battery2.png", color=[1,1,1,0.1])
+        self.gps_speed = Parametric_Label(pos_hint={"x":0.57, "y":0.65}, size_hint=(0.07, 0.1), name1="50", name2="GPS Speed", font1="32sp")
+        self.hall_speed = Parametric_Label(pos_hint={"x":0.635, "y":0.65}, size_hint=(0.07, 0.1), name1="50", name2="Sensor Speed", font1="32sp")
+        #self.linear_speed = Parametric_Label(pos_hint={"x":0.70, "y":0.65}, size_hint=(0.07, 0.1), name1="50", name2="Linear Speed", font1="32sp")
         self.dashboard = Dashboard(pos_hint={"x":0.03, "y":0.05}, size_hint=(0.1, 0.2))
         self.drs_button = Drs_Button(pos_hint= {"x" : 0.5, "y": 0.65}, size_hint=(0.05, 0.05))
+        self.steering_wheel = Icon_Indicator(pos_hint={"x": 0.6, "y": 0.4}, size_hint=(0.1, 0.1), name="Steering Angle", value=50, unit="°" , boundaries=[100,120], source="assets/steering_wheel.png", color=[1,1,1,1])
 
         #adding widgets
         self.add_widget(self.battery)   
@@ -83,10 +85,13 @@ class Main(Screen):
         self.add_widget(self.hall_speed)
         self.add_widget(self.dashboard)
         self.add_widget(self.drs_button)
+        self.add_widget(self.steering_wheel)
+        #self.add_widget(self.linear_speed)
 
         #for testing
         Clock.schedule_interval(self.acc_test, 0.2)
         Clock.schedule_interval(self.rpm, 0.05)
+        Clock.schedule_interval(self.drs_test, 1)
         #Clock.schedule_interval(self.)
  
 
@@ -98,7 +103,7 @@ class Main(Screen):
         self.gps_speed.name1 = str(random.randint(0, 125))
         self.hall_speed.name1 = str(random.randint(0, 125))
         self.bias.percentage = random.randint(0, 100)
-
+        #self.linear_speed.name1 = str(random.randint(0,125))
         
     #for testing, random
     def acc_test(self, dt):
@@ -107,3 +112,7 @@ class Main(Screen):
     def dash_test(self, dt):
         #self.dashboard.status = [random.randint()]
         pass
+    
+    # testing drs butt
+    def drs_test(self, dt):
+        self.drs_button.drs = random.randint(0,1)

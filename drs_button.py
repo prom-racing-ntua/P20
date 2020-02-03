@@ -5,7 +5,7 @@ from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Canvas, Rectangle, RoundedRectangle, Line
 from kivy.uix.floatlayout import FloatLayout
-from kivy.properties import ListProperty, ColorProperty
+from kivy.properties import ListProperty, ColorProperty, NumericProperty
 
 Builder.load_string("""
 <Drs_Button>:
@@ -20,19 +20,29 @@ Builder.load_string("""
             rgba: 1, 1, 1, 1
         Line:
             rounded_rectangle: self.x, self.y, self.width, self.height, 20, 20, 20, 20
-            width: 2
+            width: 1.5
     Label: 
         pos_hint: {'x':0, 'y':0}
         size_hint: 1,1 
         text: 'DRS'
         color: root.color1
+        
 """)
 
 class Drs_Button(FloatLayout):    
-
-    color = ListProperty([0, 1, 0, 1])
-    color1 = ColorProperty([1,1,1,1])
+    drs = NumericProperty()
+    color = ListProperty([0.043, 0.4, 0.13, 1])
+    color1 = ColorProperty([1, 1, 1, 1])
 
     def __init__(self, **kwargs):
         super(Drs_Button, self).__init__(**kwargs)
+        self.bind(drs=self.update)
+
+    def update(self, obj, val):
+        if val:  
+            self.color = [0.04, 0.6, 0.1, 1]
+        else:
+            self.color = [0, 0.6, 0, .2]
+        
+
         
