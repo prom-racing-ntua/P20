@@ -14,7 +14,14 @@ Builder.load_string('''
         pos_hint: {"x":0,"y":0}
         source: root.source
         color: root.color
-        #opacity: 1
+        canvas.before:
+            PushMatrix
+            Rotate:
+                angle: root.angle
+                origin: root.center
+        canvas.after:
+            PopMatrix
+        
     Label:
         size_hint: 0.4,0.2
         pos_hint: {"x":0.3,"y":0}
@@ -31,13 +38,21 @@ Builder.load_string('''
 
 
 class Icon_Indicator(FloatLayout):
+    angle = NumericProperty()
     value = NumericProperty()
     unit = StringProperty()
     source = StringProperty()
     name = StringProperty()
     color = ColorProperty()
     boundaries = ListProperty()
+    icon_update = NumericProperty()
 
     def __init__(self, **kwargs):
         super(Icon_Indicator, self).__init__(**kwargs)
-        print(self.value)
+        self.bind(icon_update=self.update)
+
+    def update(self, obj, val):
+        if(self.unit == '°'):
+            self.angle = val
+        self.value = val
+    

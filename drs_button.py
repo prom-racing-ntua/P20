@@ -30,13 +30,13 @@ Builder.load_string("""
 """)
 
 class Drs_Button(FloatLayout):    
-    drs = NumericProperty()
+    drs_update = NumericProperty()
     color = ListProperty([0.043, 0.4, 0.13, 1])
     color1 = ColorProperty([1, 1, 1, 1])
 
     def __init__(self, **kwargs):
         super(Drs_Button, self).__init__(**kwargs)
-        self.bind(drs=self.update)
+        self.bind(drs_update=self.update)
 
     def update(self, obj, val):
         if val:  

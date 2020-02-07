@@ -18,7 +18,7 @@ import random
 
 #custom class imports
 from tire_temps import Tire_Temps
-from battery_graph import Battery_Graph
+from parametric_graph import Parametric_Graph
 from parametric_bar import Parametric_Bar
 from pc_status import Pc_Status
 from rpmbar import RpmBar
@@ -29,9 +29,6 @@ from accel import Accel
 from time_table import Time_Table
 from trackmap import TrackMap
 from dashboard import Dashboard
-from left import Left
-from middle import Middle
-from right import Right
 from drs_button import Drs_Button
 from main import Main
 from data_screen import Data_Screen
