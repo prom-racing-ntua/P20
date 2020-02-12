@@ -13,7 +13,7 @@ Builder.load_string('''
         #id: img
         pos_hint: {"x":0,"y":0}
         source: root.source
-        color: root.color
+        opacity: root.opacity
         canvas.before:
             PushMatrix
             Rotate:
@@ -41,6 +41,7 @@ class Icon_Indicator(FloatLayout):
     angle = NumericProperty()
     value = NumericProperty()
     unit = StringProperty()
+    opacity = NumericProperty()
     source = StringProperty()
     name = StringProperty()
     color = ColorProperty()
@@ -50,9 +51,17 @@ class Icon_Indicator(FloatLayout):
     def __init__(self, **kwargs):
         super(Icon_Indicator, self).__init__(**kwargs)
         self.bind(icon_update=self.update)
+        self.bind(value=self.update)
 
     def update(self, obj, val):
-        if(self.unit == '°'):
+        if (self.unit == '°'):
             self.angle = val
+        else:
+            if (self.value>=self.boundaries[1]):
+                self.color = [1,0,0,1]
+            elif (self.value>=self.boundaries[0]):
+                self.color = [1,0.5,0,1]
+            else:
+                self.color = [1,1,1,1]
         self.value = val
     

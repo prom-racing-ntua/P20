@@ -37,7 +37,8 @@ class  Progress_Bar(BoxLayout):
         super(Progress_Bar, self).__init__(**kwargs)
 
         #widgets go in reverse
-        for i in range(19, -1, -1):
+        self.add_widget(Color_Block(color=[1,0,0,1]))
+        for i in range(18, -1, -1):
             self.add_widget(Color_Block(color=self.color))
         self.bind(active_blocks=self.update_active)
 

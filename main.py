@@ -15,6 +15,7 @@ from kivy.clock import Clock
 from kivy.properties import StringProperty, ListProperty, NumericProperty
 from kivy.uix.screenmanager import Screen, ScreenManager
 import random
+from configparser import ConfigParser
 
 
 #custom class imports
@@ -36,30 +37,33 @@ class Main(Screen):
 
     def __init__(self, **kwargs):
         super(Main, self).__init__(**kwargs)
+        config = ConfigParser()
+        config.read('config.ini')
+        cfgs = config['sensor_values']
 
         #setting up widgets
         self.tire_temps = Tire_Temps(pos_hint={"center_x": 0.5, "y": 0}, size_hint=(0.5, 0.3), temps=[[50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50]])
         self.battery = Parametric_Graph(pos_hint={"x":0, "y":0.32}, size_hint=(0.25, 0.5), label='Voltage (V)', boundaries=[0, 200, -10, 10])
-        self.kw = Parametric_Bar(pos_hint={"x":0.02, "y":0.85}, size_hint=(0.05, 0.13), name="Power(kW)", value=50, max_value=100, color=[0,0,1,1], orientation="vertical")
-        self.cur = Parametric_Bar(pos_hint={"x":0.09, "y":0.85}, size_hint=(0.05, 0.13), name="Current(A)", value=0, max_value=100, color=[0,0,1,1], orientation="vertical")
-        self.vol = Parametric_Bar(pos_hint={"x":0.16, "y":0.85}, size_hint=(0.05, 0.13), name="Voltage(V)", value=100, max_value=100, color=[0,0,1,1], orientation="vertical")
+        self.kw = Parametric_Bar(pos_hint={"x":0.02, "y":0.85}, size_hint=(0.05, 0.13), name="Power(kW)", value=50, max_value=int(cfgs['kw_max']), color=[0,0,1,1], orientation="vertical")
+        self.cur = Parametric_Bar(pos_hint={"x":0.09, "y":0.85}, size_hint=(0.05, 0.13), name="Current(A)", value=0, max_value=int(cfgs['cur_max']), color=[0,0,1,1], orientation="vertical")
+        self.vol = Parametric_Bar(pos_hint={"x":0.16, "y":0.85}, size_hint=(0.05, 0.13), name="Voltage(V)", value=100, max_value=int(cfgs['vol_max']), color=[0,0,1,1], orientation="vertical")
         self.table = Time_Table(pos_hint = {'x':0.75,'y':0.5}, size_hint = (0.25,0.5))
         self.accel = Accel(pos_hint = {'center_x':0.5,'y':0}, size_hint = (0.2,0.3), acc=[50,50])
         self.map = TrackMap(pos_hint = {'x':0.82, 'y':0.22}, size_hint = (0.25, 0.4))
         self.pc_status = Pc_Status(pos_hint={"x":0.4, "y":0.85}, size_hint=(0.2, 0.15))
-        self.tps = Parametric_Bar(pos_hint={"x":0.35, "y":0.65}, size_hint=(0.05, 0.13), name="TPS(%)", value=30, max_value=100, color=[0,1,0,1], orientation="vertical")
-        self.brake = Parametric_Bar(pos_hint={"x":0.42, "y":0.65}, size_hint=(0.05, 0.13), name="Brake(%)", value=5, max_value=100, color=[1,0,0,1], orientation="vertical")
+        self.apps = Parametric_Bar(pos_hint={"x":0.35, "y":0.65}, size_hint=(0.05, 0.13), name="APPS(%)", value=30, max_value=int(cfgs['apps_max']), color=[0,1,0,1], orientation="vertical")
+        self.brake = Parametric_Bar(pos_hint={"x":0.42, "y":0.65}, size_hint=(0.05, 0.13), name="Brake(%)", value=5, max_value=int(cfgs['brake_max']), color=[1,0,0,1], orientation="vertical")
         self.bias = Brake_Bias(pos_hint={"x":0.35, "y":0.5}, size_hint=(0.1, 0.1), percentage = 50)
-        self.rpmbar = RpmBar(pos_hint ={"x":0.35, "y":0.8},size_hint= (0.35, 0.05), value=8500, max_value=10000, color=[1,0,0,1])
-        self.motor_temp = Icon_Indicator(pos_hint={"x": 0.48, "y": 0.5}, size_hint=(0.1, 0.1), name="Motor Temp", value=50, unit="°C", boundaries=[100,120], source="assets/gear.png", color=[1,1,1])
-        self.inv_temp = Icon_Indicator(pos_hint={"x": 0.58, "y": 0.5}, size_hint=(0.1, 0.1), name="Inverter Temp", value=50, unit="°C" , boundaries=[100,120], source="assets/inv.png", color=[1,1,1,1])
-        self.bat_temp = Icon_Indicator(pos_hint={"x": 0.68, "y": 0.5}, size_hint=(0.1, 0.1), name="Battery Temp", value=50, unit="°C" , boundaries=[100,120], source="assets/battery2.png", color=[1,1,1,0.1])
+        self.rpmbar = RpmBar(pos_hint ={"x":0.35, "y":0.8},size_hint= (0.35, 0.05), value=1000, max_value=int(cfgs['rpm_max']), color=[1,0,0,1])
+        self.motor_temp = Icon_Indicator(pos_hint={"x": 0.48, "y": 0.5}, size_hint=(0.1, 0.1), name="Motor Temp", value=50, unit="°C", boundaries=[int(cfgs['motor_temp_warn']), int(cfgs['motor_temp_crit'])], source="assets/gear.png", color=[1, 1, 1], opacity=0.7)
+        self.inv_temp = Icon_Indicator(pos_hint={"x": 0.58, "y": 0.5}, size_hint=(0.1, 0.1), name="Inverter Temp", value=50, unit="°C", boundaries=[int(cfgs['inv_temp_warn']), int(cfgs['inv_temp_crit'])], source="assets/inverter2.png", color=[1, 1, 1, 1], opacity=0.4)
+        self.bat_temp = Icon_Indicator(pos_hint={"x": 0.68, "y": 0.5}, size_hint=(0.1, 0.1), name="Battery Temp", value=50, unit="°C", boundaries=[int(cfgs['battery_temp_warn']), int(cfgs['battery_temp_crit'])], source="assets/battery4.png", color=[1, 1, 1, 1], opacity=0.6)
         self.gps_speed = Parametric_Label(pos_hint={"x":0.57, "y":0.65}, size_hint=(0.07, 0.1), name1="50", name2="GPS Speed", font1="32sp")
         self.hall_speed = Parametric_Label(pos_hint={"x":0.635, "y":0.65}, size_hint=(0.07, 0.1), name1="50", name2="Sensor Speed", font1="32sp")
         #self.linear_speed = Parametric_Label(pos_hint={"x":0.70, "y":0.65}, size_hint=(0.07, 0.1), name1="50", name2="Linear Speed", font1="32sp")
         self.dashboard = Dashboard(pos_hint={"x":0.03, "y":0.05}, size_hint=(0.1, 0.2))
         self.drs_button = Drs_Button(pos_hint= {"x" : 0.5, "y": 0.65}, size_hint=(0.05, 0.05))
-        self.steering_wheel = Icon_Indicator(pos_hint={"x": 0.48, "y": 0.35}, size_hint=(0.08, 0.08), name="Steering Angle", value=50, unit="°" , boundaries=[100,120], source="assets/steering_wheel2.png", color=[0.8,0.8,0.8,1], angle =50)
+        self.steering_wheel = Icon_Indicator(pos_hint={"x": 0.48, "y": 0.35}, size_hint=(0.08, 0.08), name="Steering Angle", value=50, unit="°" , boundaries=[100,120], source="assets/steering_wheel2.png", color=[0.8,0.8,0.8,1], angle=50, opacity=0.7)
         
         #adding widgets
         self.add_widget(self.battery)   
@@ -71,7 +75,7 @@ class Main(Screen):
         self.add_widget(self.accel)
         self.add_widget(self.map)
         self.add_widget(self.pc_status)
-        self.add_widget(self.tps)
+        self.add_widget(self.apps)
         self.add_widget(self.brake)
         self.add_widget(self.bias)
         self.add_widget(self.rpmbar)
@@ -90,6 +94,7 @@ class Main(Screen):
         Clock.schedule_interval(self.rpm, 0.05)
         Clock.schedule_interval(self.drs_test, 0.5)
         Clock.schedule_interval(self.steering_wheel_test, 0.5)
+        Clock.schedule_interval(self.icon_test, 1)
         Clock.schedule_interval(self.graph_test, 0.05)
         
  
@@ -118,6 +123,9 @@ class Main(Screen):
 
     def steering_wheel_test(self, dt):
         self.steering_wheel.icon_update = random.randint(0, 360)
+
+    def icon_test(self, dt):
+        self.motor_temp.value = random.randint(0, 150)
 
     def graph_test(self, dt):
         self.battery.update_graph = random.randint(0,1)

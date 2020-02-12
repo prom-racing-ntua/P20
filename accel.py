@@ -54,8 +54,7 @@ class Accel(FloatLayout):
             self.previous.opacity = 0.7
             anim.start(self.previous)
             anim.bind(on_complete=self.remove)
-
-        #print(len(self.children))
+        #print(self.acc)
         im = Image(pos_hint={"center_x": self.acc[0]/100, "center_y": self.acc[1]/100}, source="assets/red_dot.png", size_hint= (0.05, 0.05), opacity=1)
         self.add_widget(im)
         self.previous = im
