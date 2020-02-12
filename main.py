@@ -49,7 +49,7 @@ class Main(Screen):
         self.vol = Parametric_Bar(pos_hint={"x":0.16, "y":0.85}, size_hint=(0.05, 0.13), name="Voltage(V)", value=100, max_value=int(cfgs['vol_max']), color=[0,0,1,1], orientation="vertical")
         self.table = Time_Table(pos_hint = {'x':0.75,'y':0.5}, size_hint = (0.25,0.5))
         self.accel = Accel(pos_hint = {'center_x':0.5,'y':0}, size_hint = (0.2,0.3), acc=[50,50])
-        self.map = TrackMap(pos_hint = {'x':0.82, 'y':0.22}, size_hint = (0.25, 0.4))
+        self.map = TrackMap(pos_hint = {'x':0.82, 'y':0.05}, size_hint = (0.18, 0.3))
         self.pc_status = Pc_Status(pos_hint={"x":0.4, "y":0.85}, size_hint=(0.2, 0.15))
         self.apps = Parametric_Bar(pos_hint={"x":0.35, "y":0.65}, size_hint=(0.05, 0.13), name="APPS(%)", value=30, max_value=int(cfgs['apps_max']), color=[0,1,0,1], orientation="vertical")
         self.brake = Parametric_Bar(pos_hint={"x":0.42, "y":0.65}, size_hint=(0.05, 0.13), name="Brake(%)", value=5, max_value=int(cfgs['brake_max']), color=[1,0,0,1], orientation="vertical")
