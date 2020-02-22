@@ -40,7 +40,7 @@ class Main(Screen):
         config = ConfigParser()
         config.read('config.ini')
         cfgs = config['sensor_values']
-
+     
         #setting up widgets
         self.tire_temps = Tire_Temps(pos_hint={"center_x": 0.5, "y": 0}, size_hint=(0.5, 0.3), temps=[[50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50]])
         self.battery = Parametric_Graph(pos_hint={"x":0, "y":0.32}, size_hint=(0.25, 0.5), label='Voltage (V)', boundaries=[0, 200, -10, 10])
@@ -96,8 +96,6 @@ class Main(Screen):
         Clock.schedule_interval(self.steering_wheel_test, 0.5)
         Clock.schedule_interval(self.icon_test, 1)
         Clock.schedule_interval(self.graph_test, 0.05)
-        
- 
 
     #for testing, steady
     def rpm(self, dt):
@@ -107,8 +105,8 @@ class Main(Screen):
         self.gps_speed.name1 = str(random.randint(0, 125))
         self.hall_speed.name1 = str(random.randint(0, 125))
         self.bias.percentage = random.randint(0, 100)
-        #self.linear_speed.name1 = str(random.randint(0,125))
-        
+        #self.linear_speed.name1 = str(random.randint(0,125))    
+    
     #for testing, random
     def acc_test(self, dt):
         self.accel.acc = [self.accel.acc[0]+random.randint(-10,10), self.accel.acc[1]+random.randint(-10,10)]
@@ -129,3 +127,8 @@ class Main(Screen):
 
     def graph_test(self, dt):
         self.battery.update_graph = random.randint(0,1)
+
+    def update(self, dt):
+        temp = self.bitwise_operation(self.input_data, 15)
+        self.drs_button.drs_update = temp[0]
+    
