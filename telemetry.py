@@ -37,7 +37,7 @@ from data_screen import Data_Screen
 from diagnostics import Diagnostics
 
 Builder.load_string("""
-<Main>: 
+<Main>:
     BoxLayout:
         size_hint: 0.05, 0.05
         pos_hint: {"right":1, "y":0}
@@ -86,40 +86,36 @@ Builder.load_string("""
 """)
 
 class MainScreen(App):
-    timestamp = NumericProperty
-    data = ListProperty()    
+    
+    data = ListProperty()
+    sm = ScreenManager()
+    main = Main(name='main')
+    sm.add_widget(main)
+    sm.add_widget(Data_Screen(name='data'))
+    sm.add_widget(Diagnostics(name='diagnostics'))
 
     def build(self):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
-        Main()
         Window.bind(on_key_down=self.press)
-        self.timestamp = 0
-        if comPorts != []:
-            Clock.schedule_interval(self.readserial, 0.01)
-        return sm
-
-    def get_data(self, dt):
-        self.data[0]=self.data[0]-random.randint(0,5)
-        self.data[1]+=1
-        self.left.data[0]=self.data[0]
-        self.left.data[1]=self.data[1]
+        Clock.schedule_interval(self.readserial, 0.01)
+        return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
         if keycode == 275: # ascii code for left
-            if sm.current == 'main':
-                sm.transition = SlideTransition(direction="left")
-                sm.current = 'data'
-            elif sm.current == 'diagnostics':
-                sm.transition = SlideTransition(direction="left")
-                sm.current = 'main'
+            if self.sm.current == 'main':
+                self.sm.transition = SlideTransition(direction="left")
+                self.sm.current = 'data'
+            elif self.sm.current == 'diagnostics':
+                self.sm.transition = SlideTransition(direction="left")
+                self.sm.current = 'main'
         elif keycode == 276: # ascii code for right 
-            if sm.current == 'main':
-                sm.transition = SlideTransition(direction="right")
-                sm.current = 'diagnostics'
-            elif sm.current == 'data':
-                sm.transition = SlideTransition(direction="right")
-                sm.current = 'main'
+            if self.sm.current == 'main':
+                self.sm.transition = SlideTransition(direction="right")
+                self.sm.current = 'diagnostics'
+            elif self.sm.current == 'data':
+                self.sm.transition = SlideTransition(direction="right")
+                self.sm.current = 'main'
         elif keycode == 27: # ascii code for ESC
             App.stop(self)
         return True
@@ -128,25 +124,17 @@ class MainScreen(App):
         if ser.in_waiting:
             temp = ser.readline()
             self.data = temp.split()
-            print("Sender is running for:" , float(self.data[0])/1000, "seconds")
-
-sm = ScreenManager()
-sm.add_widget(Main(name='main'))
-sm.add_widget(Data_Screen(name='data'))
-sm.add_widget(Diagnostics(name='diagnostics'))
-
+            self.main.data = self.data
+            #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
+    
 
 if __name__ == '__main__':
     try:
-        comPorts = list(serial.tools.list_ports.comports())
-        if(comPorts != []):
-            port_open = True
-            ser = serial.Serial(
-                port= 'COM3',
-                baudrate= '115200', 
-                timeout= 20 
-            )
-        
+        ser = serial.Serial(
+            port= 'COM3',
+            baudrate= '115200', 
+            timeout= 20 
+        )
         MainScreen().run()
     except Exception as e:
         raise e

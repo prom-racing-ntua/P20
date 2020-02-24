@@ -61,14 +61,10 @@ class Parametric_Bar(FloatLayout):
         self.add_widget(self.label)
         self.add_widget(self.progress)
 
-        #for testing
-        Clock.schedule_interval(self.rng, 0.5)
 
         self.bind(value=self.update)
 
     #for testing, random
-    def rng(self, dt):
-        self.value = random.randint(0,self.max_value)
     
     def update(self, obj, value):
         self.active_blocks = (self.value*20)/self.max_value

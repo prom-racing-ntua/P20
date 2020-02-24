@@ -13,11 +13,6 @@ Builder.load_string("""
 <TrackMap>: 
     canvas:
         Color:
-            rgba: 1, 1, 1, 1
-        Line:
-            rectangle: self.x,self.y,self.width,self.height
-            width: 1.5
-        Color:
             rgba: self.color
         Line:
             points: self.coords
@@ -25,7 +20,7 @@ Builder.load_string("""
        
 """)
 
-class TrackMap(FloatLayout):
+class TrackMap(RelativeLayout):
 
     longs = ListProperty()
     lats = ListProperty()
@@ -54,12 +49,13 @@ class TrackMap(FloatLayout):
         maxy = max(self.lats)
         miny = min(self.lats)
         pixel_height = 1.2 * self.size_hint[1] * Window.height 
-        pixel_width = self.size_hint[0] * Window.width 
+        pixel_width = self.size_hint[0] * Window.width
+        #print(Window.height, Window.width) 
         scalex = pixel_width / (maxx - minx)
         scaley = pixel_height / (maxy - miny)
         for i in range(len(self.longs)):
-            self.coords.append(1.02*self.pos_hint['x'] * Window.width + 0.8 * scaley * abs(self.lats[i]-miny))
-            self.coords.append(1.4*self.pos_hint['y'] * Window.height + 0.8 * scalex * abs(self.longs[i]-minx))
+            self.coords.append(scaley * abs(self.lats[i]-miny))
+            self.coords.append(scalex * abs(self.longs[i]-minx))
 
             
 # for converting geo_coords to x and y check this : https://stackoverflow.com/questions/16266809/convert-from-latitude-longitude-to-x-y
