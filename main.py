@@ -93,7 +93,10 @@ class Main(Screen):
         #for testing
         
         #Clock.schedule_interval(self.rpm, 0.05)
-        Clock.schedule_interval(self.update, 0.05)
+        self.bind(data=self.update)
+        #Clock.schedule_interval(self.update, 0.05)
+        
+        #Clock.schedule_interval(self.update, 0.05)
         Clock.schedule_interval(self.tire_temps.update_linears, 0.05)
         Clock.schedule_interval(self.tire_temps.update_temps, 0.05)
 
@@ -103,7 +106,7 @@ class Main(Screen):
             self.rpmbar.value = 1000
         self.rpmbar.value += 1000
 
-    def update(self, dt):
+    def update(self, obj, value):
         if self.data != []:
             self.steering_wheel.icon_update = int(self.data[4])
             self.motor_temp.value = int(self.data[3])

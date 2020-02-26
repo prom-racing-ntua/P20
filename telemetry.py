@@ -86,22 +86,22 @@ Builder.load_string("""
 """)
 
 class MainScreen(App):
-    
+
+    ser_bytes = NumericProperty()    
     data = ListProperty()
     sm = ScreenManager()
     main = Main(name='main')
-    data = Data_Screen(name='data')
+    data_screen = Data_Screen(name='data')
     diagnostics = Diagnostics(name='diagnostics')
     sm.add_widget(main)
-    sm.add_widget(data)
+    sm.add_widget(data_screen)
     sm.add_widget(diagnostics)
 
     def build(self):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        if list(serial.tools.list_ports.comports()) != []:
-            Clock.schedule_interval(self.readserial, 0.01)
+        Clock.schedule_interval(self.readserial, 0.01)
         return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
@@ -128,8 +128,9 @@ class MainScreen(App):
             temp = ser.readline()
             self.data = temp.split()
             self.main.data = self.data
+            print("Sender is running for:" , float(self.data[0])/1000, "seconds")
             self.diagnostics.data = self.data
-            self.data.data = self.data
+            self.data_screen.data = self.data
             #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
     
 
@@ -137,11 +138,9 @@ if __name__ == '__main__':
     try:
         ser = serial.Serial(
             baudrate= '115200', 
-            timeout= 20
+            timeout= 20,
+            port='COM3'
         )
-        if list(serial.tools.list_ports.comports()) != []:
-            ser.port = 'COM3'
-
         MainScreen().run()
     except Exception as e:
         raise e
