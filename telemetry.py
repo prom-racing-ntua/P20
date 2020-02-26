@@ -90,15 +90,18 @@ class MainScreen(App):
     data = ListProperty()
     sm = ScreenManager()
     main = Main(name='main')
+    data = Data_Screen(name='data')
+    diagnostics = Diagnostics(name='diagnostics')
     sm.add_widget(main)
-    sm.add_widget(Data_Screen(name='data'))
-    sm.add_widget(Diagnostics(name='diagnostics'))
+    sm.add_widget(data)
+    sm.add_widget(diagnostics)
 
     def build(self):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.readserial, 0.01)
+        if list(serial.tools.list_ports.comports()) != []:
+            Clock.schedule_interval(self.readserial, 0.01)
         return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
@@ -125,16 +128,20 @@ class MainScreen(App):
             temp = ser.readline()
             self.data = temp.split()
             self.main.data = self.data
+            self.diagnostics.data = self.data
+            self.data.data = self.data
             #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
     
 
 if __name__ == '__main__':
     try:
         ser = serial.Serial(
-            port= 'COM3',
             baudrate= '115200', 
-            timeout= 20 
+            timeout= 20
         )
+        if list(serial.tools.list_ports.comports()) != []:
+            ser.port = 'COM3'
+
         MainScreen().run()
     except Exception as e:
         raise e
