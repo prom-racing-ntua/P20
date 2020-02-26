@@ -136,12 +136,13 @@ class MainScreen(App):
 
 if __name__ == '__main__':
     try:
+        print(serial.tools.list_ports.comports())
         ser = serial.Serial(
             baudrate= '115200', 
             timeout= 20,
             port='COM3'
         )
-        
+
         MainScreen().run()
     except Exception as e:
         raise e

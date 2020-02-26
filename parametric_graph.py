@@ -51,7 +51,9 @@ class Parametric_Graph(BoxLayout):
             self.xmax *=2
         
         self.value = value[1]
-        self.time = value[0] 
+        if self.prev != 0:
+            self.time += value[0] - self.prev
+        self.prev = value[0] 
         self.points.append((self.time, self.value))
         self.plot.points = self.points
         self.mygraph.remove_plot(self.plot)
