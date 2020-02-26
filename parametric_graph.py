@@ -19,8 +19,8 @@ Builder.load_string("""
             x_grid_label: True
             y_grid: True
             y_grid_label: True
-            y_ticks_major: 2
-            x_ticks_major: 20
+            y_ticks_major: 40
+            x_ticks_major: 10
             xmin: 0
             xmax: root.xmax
             ymin: 0
@@ -39,7 +39,7 @@ class Parametric_Graph(BoxLayout):
     plot = ObjectProperty()
     boundaries = ListProperty()
     xmax = NumericProperty(10)
-    prev = NumericProperty()
+    start_time = NumericProperty(0)
 
     def __init__(self, **kwargs):
         super(Parametric_Graph, self).__init__(**kwargs)
@@ -47,13 +47,14 @@ class Parametric_Graph(BoxLayout):
         self.bind(update_graph= self.update)
 
     def update(self, obj, value):
-        if value[0] >= self.xmax:
+        if value[0] - self.start_time >= self.xmax:
             self.xmax *=2
-        
+
         self.value = value[1]
-        if self.prev != 0:
-            self.time += value[0] - self.prev
-        self.prev = value[0] 
+        if self.start_time == 0:
+            self.start_time = value[0]
+        self.time = value[0] - self.start_time
+        print(self.time)
         self.points.append((self.time, self.value))
         self.plot.points = self.points
         self.mygraph.remove_plot(self.plot)

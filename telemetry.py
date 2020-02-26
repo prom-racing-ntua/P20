@@ -126,9 +126,10 @@ class MainScreen(App):
     def readserial(self, dt):
         if ser.in_waiting:
             temp = ser.readline()
+            #print(ser.in_waiting)
             self.data = temp.split()
             self.main.data = self.data
-            print("Sender is running for:" , float(self.data[0])/1000, "seconds")
+            #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
             self.diagnostics.data = self.data
             self.data_screen.data = self.data
             #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
@@ -136,7 +137,7 @@ class MainScreen(App):
 
 if __name__ == '__main__':
     try:
-        print(serial.tools.list_ports.comports())
+        #print(serial.tools.list_ports.comports())
         ser = serial.Serial(
             baudrate= '115200', 
             timeout= 20,

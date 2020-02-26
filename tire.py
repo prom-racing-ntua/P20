@@ -28,6 +28,7 @@ Builder.load_string('''
                 pos: self.x, self.y
                 size: self.size
                 radius: [20,0,0,20]
+        canvas.after:
             Color:
                 rgba: 1,1,1,0.8
             Line:
@@ -42,6 +43,7 @@ Builder.load_string('''
                 pos: self.x, self.y
                 size: self.size
                 radius: [0,0,0,0]
+        canvas.after:
             Color:
                 rgba: 1,1,1,0.8
             Line:
@@ -56,6 +58,7 @@ Builder.load_string('''
                 pos: self.x, self.y
                 size: self.size
                 radius: [0,0,0,0]
+        canvas.after:
             Color:
                 rgba: 1,1,1,0.8
             Line:
@@ -70,6 +73,7 @@ Builder.load_string('''
                 pos: self.x, self.y
                 size: self.size
                 radius: [0,20,20,0]
+        canvas.after:
             Color:
                 rgba: 1,1,1,0.8
             Line:

@@ -117,4 +117,4 @@ class Main(Screen):
             self.bias.percentage = int(self.data[13])
             self.apps.value = int(self.data[14])
             self.brake.value = int(self.data[15])
-            self.rpmbar.value = int(self.data[16])
+            self.rpmbar.value = 10 * int(self.data[16])
