@@ -13,7 +13,7 @@ Builder.load_string("""
         pos: root.pos 
         Graph:
             id: mygraph
-            xlabel: 'Time (mins)'
+            xlabel: 'Time (secs)'
             ylabel: root.label
             x_grid: True
             x_grid_label: True
@@ -22,9 +22,9 @@ Builder.load_string("""
             y_ticks_major: 2
             x_ticks_major: 20
             xmin: 0
-            xmax: 200 
-            ymin: -10
-            ymax: 10
+            xmax: root.xmax
+            ymin: 0
+            ymax: 260
         
 """)
 
@@ -38,15 +38,22 @@ class Parametric_Graph(BoxLayout):
     update_graph = ObjectProperty()
     plot = ObjectProperty()
     boundaries = ListProperty()
-    
+    xmax = NumericProperty(10)
+    prev = NumericProperty()
+
     def __init__(self, **kwargs):
         super(Parametric_Graph, self).__init__(**kwargs)
         self.plot = MeshLinePlot(color=[0,1,0,1])
         self.bind(update_graph= self.update)
 
-    def update(self, *args):
-        self.value += random.randint(-1, 1)
-        self.time += 1
+    def update(self, obj, value):
+        if value[0] >= self.xmax:
+            self.xmax *=2
+        
+        self.value = value[1]
+        if self.prev != 0:
+            self.time += value[0] - self.prev
+        self.prev = value[0] 
         self.points.append((self.time, self.value))
         self.plot.points = self.points
         self.mygraph.remove_plot(self.plot)

@@ -88,7 +88,7 @@ Builder.load_string("""
 class MainScreen(App):
 
     ser_bytes = NumericProperty()    
-    data = ListProperty()
+    data = ListProperty([0,0,0,0,0,0])
     sm = ScreenManager()
     main = Main(name='main')
     data_screen = Data_Screen(name='data')
@@ -136,11 +136,13 @@ class MainScreen(App):
 
 if __name__ == '__main__':
     try:
+        print(serial.tools.list_ports.comports())
         ser = serial.Serial(
             baudrate= '115200', 
             timeout= 20,
             port='COM3'
         )
+
         MainScreen().run()
     except Exception as e:
         raise e

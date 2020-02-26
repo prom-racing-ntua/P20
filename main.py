@@ -92,11 +92,7 @@ class Main(Screen):
 
         #for testing
         
-        #Clock.schedule_interval(self.rpm, 0.05)
         self.bind(data=self.update)
-        #Clock.schedule_interval(self.update, 0.05)
-        
-        #Clock.schedule_interval(self.update, 0.05)
         Clock.schedule_interval(self.tire_temps.update_linears, 0.05)
         Clock.schedule_interval(self.tire_temps.update_temps, 0.05)
 
@@ -110,14 +106,14 @@ class Main(Screen):
         if self.data != []:
             self.steering_wheel.icon_update = int(self.data[4])
             self.motor_temp.value = int(self.data[3])
-            self.battery.update_graph = int(self.data[5])
+            self.battery.update_graph = [int(self.data[0])/1000, int(self.data[5])]
             self.inv_temp.value = int(self.data[6])
             self.bat_temp.value = int(self.data[7])
             self.kw.value = int(self.data[8])
             self.cur.value = int(self.data[9])
             self.vol.value = int(self.data[10])
-            #self.gps_speed.name1 = self.data[11]
-            #self.hall_speed.name1 = self.data[12]
+            self.gps_speed.name1 = str(int(self.data[11]))
+            self.hall_speed.name1 = str(int(self.data[12]))
             self.bias.percentage = int(self.data[13])
             self.apps.value = int(self.data[14])
             self.brake.value = int(self.data[15])
