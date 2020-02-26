@@ -113,8 +113,8 @@ class Main(Screen):
             self.kw.value = int(self.data[8])
             self.cur.value = int(self.data[9])
             self.vol.value = int(self.data[10])
-            self.gps_speed.name1 = str(int(self.data[11]))
-            self.hall_speed.name1 = str(int(self.data[12]))
+            self.gps_speed.name1 = self.data[11]
+            self.hall_speed.name1 = self.data[12]
             self.bias.percentage = int(self.data[13])
             self.apps.value = int(self.data[14])
             self.brake.value = int(self.data[15])
