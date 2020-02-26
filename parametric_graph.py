@@ -19,7 +19,7 @@ Builder.load_string("""
             x_grid_label: True
             y_grid: True
             y_grid_label: True
-            y_ticks_major: 2
+            y_ticks_major: 40
             x_ticks_major: 20
             xmin: 0
             xmax: root.xmax
@@ -47,7 +47,7 @@ class Parametric_Graph(BoxLayout):
         self.bind(update_graph= self.update)
 
     def update(self, obj, value):
-        if value[0] >= self.xmax:
+        if value[0] - self.prev >= self.xmax:
             self.xmax *=2
         
         self.value = value[1]
