@@ -91,9 +91,11 @@ class MainScreen(App):
     data = ListProperty()
     sm = ScreenManager()
     main = Main(name='main')
+    data_screen = Data_Screen(name='data')
+    diagnostics = Diagnostics(name='diagnostics')
     sm.add_widget(main)
-    sm.add_widget(Data_Screen(name='data'))
-    sm.add_widget(Diagnostics(name='diagnostics'))
+    sm.add_widget(data_screen)
+    sm.add_widget(diagnostics)
 
     def build(self):
         Window.clearcolor = (0, 0, 0, 1)
@@ -127,14 +129,17 @@ class MainScreen(App):
             self.data = temp.split()
             self.main.data = self.data
             print("Sender is running for:" , float(self.data[0])/1000, "seconds")
+            self.diagnostics.data = self.data
+            self.data_screen.data = self.data
+            #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
     
 
 if __name__ == '__main__':
     try:
         ser = serial.Serial(
-            port= 'COM3',
             baudrate= '115200', 
-            timeout= 20 
+            timeout= 20,
+            port='COM3'
         )
         MainScreen().run()
     except Exception as e:

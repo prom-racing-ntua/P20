@@ -50,7 +50,5 @@ class Parametric_Graph(BoxLayout):
         self.points.append((self.time, self.value))
         self.plot.points = self.points
         self.mygraph.remove_plot(self.plot)
-        self.mygraph.add_plot(self.plot) # this might add points indefenetly. should check if it crashes
+        self.mygraph.add_plot(self.plot) 
         
-        # possible fix 
-        # self.my.graph.remove_plot(self.plot) # but it doesn't look that good.

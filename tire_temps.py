@@ -60,8 +60,8 @@ class Tire_Temps(FloatLayout):
         #self.add_widget(self.arr)
 
         Clock.schedule_interval(self.update, 0.5)
-        Clock.schedule_interval(self.update_temps, 0.5)
-        Clock.schedule_interval(self.update_linears, 0.1)
+        # Clock.schedule_interval(self.update_temps, 0.5)
+        # Clock.schedule_interval(self.update_linears, 0.1)
 
         self.bind(temps=self.update_temps)
 

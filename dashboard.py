@@ -42,4 +42,3 @@ class Dashboard(GridLayout):
     def update(self):
         print(self.ids)
 
-
