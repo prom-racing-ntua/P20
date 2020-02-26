@@ -45,7 +45,7 @@ class Main(Screen):
         cfgs = config['sensor_values']
 
         #setting up widgets
-        self.tire_temps = Tire_Temps(pos_hint={"center_x": 0.5, "y": 0}, size_hint=(0.5, 0.3), temps=[[50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50]])
+        self.tire_temps = Tire_Temps(pos_hint={"center_x": 0.5, "y": 0}, size_hint=(0.5, 0.3), temps=[[50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50]], boundary=int(cfgs['infrared_offset']))
         self.battery = Parametric_Graph(pos_hint={"x":0, "y":0.32}, size_hint=(0.25, 0.5), label='Voltage (V)', boundaries=[0, 200, -10, 10])
         self.kw = Parametric_Bar(pos_hint={"x":0.02, "y":0.85}, size_hint=(0.05, 0.13), name="Power(kW)", value= 0, max_value=int(cfgs['kw_max']), color=[0,0,1,1], orientation="vertical")
         self.cur = Parametric_Bar(pos_hint={"x":0.09, "y":0.85}, size_hint=(0.05, 0.13), name="Current(A)", value=0, max_value=int(cfgs['cur_max']), color=[0,0,1,1], orientation="vertical")
@@ -116,8 +116,8 @@ class Main(Screen):
             self.kw.value = int(self.data[8])
             self.cur.value = int(self.data[9])
             self.vol.value = int(self.data[10])
-            self.gps_speed.name1 = self.data[11]
-            self.hall_speed.name1 = self.data[12]
+            #self.gps_speed.name1 = self.data[11]
+            #self.hall_speed.name1 = self.data[12]
             self.bias.percentage = int(self.data[13])
             self.apps.value = int(self.data[14])
             self.brake.value = int(self.data[15])

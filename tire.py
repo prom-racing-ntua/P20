@@ -81,6 +81,8 @@ class Tire(BoxLayout):
     name = StringProperty()
     temp = ListProperty()
     colors = ListProperty(defaultvalue = [[0,0,1], [0,0,1], [0,0,1], [0,0,1]]) 
+    offset = NumericProperty()
+    boundary = NumericProperty()
 
     def __init__(self,x=None,y=None, **kwargs):
         super(Tire, self).__init__(**kwargs)
@@ -89,7 +91,9 @@ class Tire(BoxLayout):
 
     def color_picker(self, obj, value):
         for i in range(4):
-            self.colors[i] = cl[round((150-self.temp[i])/12)]
+            tmp = 12-((self.temp[i]+self.offset)/12)
+            if tmp>0 and tmp<=12:
+                self.colors[i] = cl[round(tmp)]
         
 
 

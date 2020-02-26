@@ -34,13 +34,14 @@ class Tire_Temps(FloatLayout):
 
     temps = ListProperty()
     lin = ListProperty()
+    boundary = NumericProperty()
     def __init__(self, **kwargs):
         
         super(Tire_Temps, self).__init__(**kwargs)
-        self.fl = Tire(pos_hint={"x": 0, "y": 0.5}, size_hint=(0.2, 0.47), temp = [50,50,50,50])
-        self.fr = Tire(pos_hint={"x": 0.8, "y": 0.5}, size_hint=(0.2, 0.47), temp = [50,50,50,50])
-        self.rl = Tire(pos_hint={"x": 0, "y": 0}, size_hint=(0.2, 0.47), temp = [50,50,50,50])
-        self.rr = Tire(pos_hint={"x": 0.8, "y": 0}, size_hint=(0.2, 0.47), temp = [50,50,50,50])
+        self.fl = Tire(pos_hint={"x": 0, "y": 0.5}, size_hint=(0.2, 0.47), temp = [50,50,50,50], boundary=self.boundary)
+        self.fr = Tire(pos_hint={"x": 0.8, "y": 0.5}, size_hint=(0.2, 0.47), temp = [50,50,50,50], boundary=self.boundary)
+        self.rl = Tire(pos_hint={"x": 0, "y": 0}, size_hint=(0.2, 0.47), temp = [50,50,50,50], boundary=self.boundary)
+        self.rr = Tire(pos_hint={"x": 0.8, "y": 0}, size_hint=(0.2, 0.47), temp = [50,50,50,50], boundary=self.boundary)
         self.fll = Progress_Bar(pos_hint={"x": 0.22, "y": 0.5}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
         self.frl = Progress_Bar(pos_hint={"x": 0.73, "y": 0.5}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
         self.rll = Progress_Bar(pos_hint={"x": 0.22, "y": 0}, size_hint=(0.05, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
