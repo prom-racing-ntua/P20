@@ -86,7 +86,8 @@ Builder.load_string("""
 """)
 
 class MainScreen(App):
-    
+
+    ser_bytes = NumericProperty()    
     data = ListProperty()
     sm = ScreenManager()
     main = Main(name='main')
@@ -125,7 +126,7 @@ class MainScreen(App):
             temp = ser.readline()
             self.data = temp.split()
             self.main.data = self.data
-            #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
+            print("Sender is running for:" , float(self.data[0])/1000, "seconds")
     
 
 if __name__ == '__main__':
