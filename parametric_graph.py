@@ -20,7 +20,7 @@ Builder.load_string("""
             y_grid: True
             y_grid_label: True
             y_ticks_major: 40
-            x_ticks_major: 10
+            x_ticks_major: root.xmax/4
             xmin: 0
             xmax: root.xmax
             ymin: 0

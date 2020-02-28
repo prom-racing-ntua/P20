@@ -137,11 +137,11 @@ class MainScreen(App):
 
 if __name__ == '__main__':
     try:
-        #print(serial.tools.list_ports.comports())
+        #print(serial.tools.list_ports.comports()[0])
         ser = serial.Serial(
             baudrate= '115200', 
             timeout= 20,
-            port='COM3'
+            port= '/dev/ttyUSB0'
         )
 
         MainScreen().run()
