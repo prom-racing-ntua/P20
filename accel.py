@@ -18,11 +18,11 @@ Builder.load_string('''
         Rectangle:
             pos: self.pos
             size: self.size
-            source: "assets/scope.png"
+            source: "assets/scope3.png"
         Color:
             rgba: 1,1,1,0.5
-        Line:
-            rectangle: self.x, self.y, self.width, self.height
+        # Line:
+        #     rectangle: self.x, self.y, self.width, self.height
     #Image:
         #pos_hint: {"center_x":0.5, "center_y":0.5}
         #source: "assets/red_dot.png"

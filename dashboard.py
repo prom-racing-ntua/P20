@@ -13,7 +13,6 @@ from kivy.clock import Clock
 
 #custom library imports
 
-dash_labels = ["IMD","BMS","Inverter"]
 
 Builder.load_string('''
 <Dashboard>:
@@ -22,23 +21,66 @@ Builder.load_string('''
             rgba: 1,1,1,1
         Line:
             rectangle: self.x, self.y, self.width, self.height
+    Image:
+        source: "assets/green_dot.png"
+        size_hint: 0.05, 0.05        
+        opacity: root.status & 1
+    Label:
+        text: root.dash_labels[0]
+    Image:
+        source: "assets/green_dot.png"
+        size_hint: 0.05, 0.05        
+        opacity: root.status & 2
+    Label:
+        text: root.dash_labels[1]
+    Image:
+        source: "assets/green_dot.png"
+        size_hint: 0.05, 0.05        
+        opacity: root.status & 4
+    Label:
+        text: root.dash_labels[2]
+    Image:
+        source: "assets/green_dot.png"
+        size_hint: 0.05, 0.05        
+        opacity: root.status & 8
+    Label:
+        text: root.dash_labels[3]
+    Image:
+        source: "assets/green_dot.png"
+        size_hint: 0.05, 0.05        
+        opacity: root.status & 16
+    Label:
+        text: root.dash_labels[4]
+    Image:
+        source: "assets/green_dot.png"
+        size_hint: 0.05, 0.05        
+        opacity: root.status & 32
+    Label:
+        text: root.dash_labels[5]
+    Image:
+        source: "assets/green_dot.png"
+        size_hint: 0.05, 0.05        
+        opacity: root.status & 64
+    Label:
+        text: root.dash_labels[6]
+    Image:
+        source: "assets/green_dot.png"
+        size_hint: 0.05, 0.05        
+        opacity: root.status & 128
+    Label:
+        text: root.dash_labels[7] 
 ''')
 
 
 class Dashboard(GridLayout):
 
-    status = ListProperty(defaultvalue=[1,1,1])
+    status = NumericProperty(255)
+    dash_labels = ["BMS","IMD","TS Active", "A/A status", "A/A button",
+    "RTD status", "RTD button", "Shutdown"]
 
     def __init__(self, **kwargs):
         super(Dashboard, self).__init__(**kwargs)
         self.cols = 2
-        self.padding = 20
-        for i in range(3):
-            self.add_widget(Image(size_hint=(0.1,0.1), source="assets/green_dot.png"))
-            self.add_widget(Label(text=dash_labels[i]))
+        self.padding = 10
         
-        self.bind(status=self.update)
-
-    def update(self):
-        print(self.ids)
 

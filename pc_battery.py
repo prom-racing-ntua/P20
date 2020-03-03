@@ -26,7 +26,6 @@ class Pc_Battery(BoxLayout):
         self.orientation = "horizontal"
         self.spacing = 5
         self.battery = psutil.sensors_battery()
-        print(self.battery.percent)
         for i in range(4, -1, -1):
             a = 0 if (4-i)*20 >= self.battery.percent else 1
             self.add_widget(Color_Block(color=[1,1,1,a]))

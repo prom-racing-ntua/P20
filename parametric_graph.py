@@ -20,11 +20,11 @@ Builder.load_string("""
             y_grid: True
             y_grid_label: True
             y_ticks_major: 40
-            x_ticks_major: root.xmax/4
+            x_ticks_major: root.xmax/10
             xmin: 0
             xmax: root.xmax
-            ymin: 0
-            ymax: 260
+            ymin: 300
+            ymax: 588
         
 """)
 
@@ -54,8 +54,8 @@ class Parametric_Graph(BoxLayout):
         if self.start_time == 0:
             self.start_time = value[0]
         self.time = value[0] - self.start_time
-        print(self.time)
-        self.points.append((self.time, self.value))
+        #print(self.time)
+        self.points.append((self.time, self.value + 325))
         self.plot.points = self.points
         self.mygraph.remove_plot(self.plot)
         self.mygraph.add_plot(self.plot) 

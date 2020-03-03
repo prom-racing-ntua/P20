@@ -101,7 +101,8 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.readserial, 0.01)
+        if serial.tools.list_ports.comports():
+            Clock.schedule_interval(self.readserial, 0.01)
         return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
@@ -137,12 +138,12 @@ class MainScreen(App):
 
 if __name__ == '__main__':
     try:
-        #print(serial.tools.list_ports.comports()[0])
-        ser = serial.Serial(
-            baudrate= '115200', 
-            timeout= 20,
-            port= '/dev/ttyUSB0'
-        )
+        if serial.tools.list_ports.comports():
+            ser = serial.Serial(
+                baudrate= '115200', 
+                timeout= 20,
+                port= '/dev/ttyUSB0'
+            )
 
         MainScreen().run()
     except Exception as e:

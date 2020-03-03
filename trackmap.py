@@ -11,7 +11,7 @@ from kivy.clock import Clock
 
 Builder.load_string("""
 <TrackMap>: 
-    canvas:
+    canvas.before:
         Color:
             rgba: self.color
         Line:
