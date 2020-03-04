@@ -17,6 +17,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
 import random
 import serial
 import serial.tools.list_ports   # import serial module
+import platform
 
 #custom class imports
 from tire_temps import Tire_Temps
@@ -139,10 +140,11 @@ class MainScreen(App):
 if __name__ == '__main__':
     try:
         if serial.tools.list_ports.comports():
+            temp = str(serial.tools.list_ports.comports()[0]).split()
             ser = serial.Serial(
                 baudrate= '115200', 
                 timeout= 20,
-                port= '/dev/ttyUSB0'
+                port=temp[0]
             )
 
         MainScreen().run()
