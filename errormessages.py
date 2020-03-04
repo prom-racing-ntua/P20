@@ -20,5 +20,5 @@ class ErrorMessages(ScrollView):
         super(ErrorMessages, self).__init__(**kwargs)
         self.box = BoxLayout(orientation='vertical')
         for i in range(100):
-            self.box.add_widget(Label(text='errors', height=130))
+            self.box.add_widget(Label(text='errors{}'.format(i), size_hint=(1, None)))
         self.add_widget(self.box)
