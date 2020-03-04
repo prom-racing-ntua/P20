@@ -53,7 +53,7 @@ class TrackMap(RelativeLayout):
         miny = min(self.lats)
         pixel_height = 1.2 * self.size_hint[1] * Window.height 
         pixel_width = self.size_hint[0] * Window.width
-        #print(Window.height, Window.width) 
+        print(Window.height, Window.width) 
         scalex = pixel_width / (maxx - minx)
         scaley = pixel_height / (maxy - miny)
         for i in range(len(self.longs)):
@@ -62,10 +62,10 @@ class TrackMap(RelativeLayout):
 
     def update_track_position(self, dt):
         self.remove_widget(self.im)
-        index = random.randint(0,len(self.coords))
+        index = random.randint(1,len(self.coords))
         if index%2:
             index-=1
-        self.im = Image(pos=(self.coords[index], self.coords[index+1]), source="assets/red_dot.png", size_hint= (0.05, 0.05), opacity=1)
+        self.im = Image(pos=(self.coords[index] - 2*self.wid, self.coords[index+1] - 2*self.wid), source="assets/red_dot.png", size_hint= (0.05, 0.05), opacity=1)
         self.add_widget(self.im)
             
 # for converting geo_coords to x and y check this : https://stackoverflow.com/questions/16266809/convert-from-latitude-longitude-to-x-y
