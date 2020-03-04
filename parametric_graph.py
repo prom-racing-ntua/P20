@@ -8,6 +8,7 @@ import random
 Builder.load_string("""
 <Parametric_Graph>:
     mygraph: mygraph
+    
     BoxLayout:
         size: root.size
         pos: root.pos 

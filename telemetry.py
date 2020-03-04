@@ -39,7 +39,7 @@ from diagnostics import Diagnostics
 Builder.load_string("""
 <Main>:
     BoxLayout:
-        size_hint: 0.05, 0.05
+        size_hint: 0.035, 0.035
         pos_hint: {"right":1, "y":0}
         Button:
             size_hint: 1,1
@@ -50,7 +50,7 @@ Builder.load_string("""
             
             font_size: 10
     BoxLayout:
-        size_hint: 0.05, 0.05
+        size_hint: 0.035, 0.035
         pos_hint: {"left":1, "y":0}
         Button:
             size_hint: 1,1
@@ -62,7 +62,7 @@ Builder.load_string("""
             
 <Data_Screen>:
     BoxLayout:
-        size_hint: 0.05, 0.05
+        size_hint: 0.035, 0.035
         pos_hint: {"left":1, "y":0}
         Button:
             size_hint: 1,1           
@@ -73,7 +73,7 @@ Builder.load_string("""
             font_size: 10
 <Diagnostics>:
     BoxLayout:
-        size_hint: 0.05, 0.05
+        size_hint: 0.035, 0.035
         pos_hint: {"right":1, "y":0}
         Button:
             size_hint: 1,1

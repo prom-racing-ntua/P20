@@ -1,5 +1,3 @@
 __pycache__/
 *.pyc
 /.vscode
-histogram.py
-kivy_venv
