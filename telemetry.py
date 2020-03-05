@@ -89,6 +89,7 @@ Builder.load_string("""
 class MainScreen(App):
 
     ser_bytes = NumericProperty()
+    ser = serial.Serial()
     data = ListProperty([0,0,0,0,0,0])
     sm = ScreenManager()
     main = Main(name='main')
@@ -127,16 +128,20 @@ class MainScreen(App):
     
     def readserial(self, dt):
         try:
+            global ser
             if ser.in_waiting:
                 temp = ser.readline()
+                
                 #print(ser.in_waiting)
                 self.data = temp.split()
+                print(self.data[4],self.data[5])
                 self.main.data = self.data
                 #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
                 self.diagnostics.data = self.data
                 self.data_screen.data = self.data
                 #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
         except Exception as e:
+            print(e)
             self.main.pc_status.serial_status = False
             try:
                 ser = serial.Serial(
@@ -154,9 +159,9 @@ if __name__ == '__main__':
         #if serial.tools.list_ports.comports():
             
             #ser = serial.Serial(
-            #    baudrate= '115200', 
-            #    timeout= 20,
-            #    port= str(serial.tools.list_ports.comports()[0]).split()[0]
+                #baudrate= '115200', 
+                #timeout= 20,
+                #port= str(serial.tools.list_ports.comports()[0]).split()[0]
             #)
         MainScreen().run()
         
