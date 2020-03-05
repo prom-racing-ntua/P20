@@ -140,7 +140,6 @@ class MainScreen(App):
                 self.data_screen.data = self.data
                 #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
         except Exception as e:
-            print(e)
             self.main.pc_status.serial_status = False
             try:
                 ser = serial.Serial(
