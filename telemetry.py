@@ -129,7 +129,7 @@ class MainScreen(App):
         try:
             if ser.in_waiting:
                 temp = ser.readline()
-                #print(ser.in_waiting)
+                print(ser.in_waiting)
                 self.data = temp.split()
                 self.main.data = self.data
                 #print("Sender is running for:" , float(self.data[0])/1000, "seconds")

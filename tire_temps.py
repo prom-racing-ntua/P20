@@ -33,7 +33,7 @@ class Tire_Temps(FloatLayout):
     """
 
     temps = ListProperty()
-    lin = ListProperty()
+    lin = ListProperty([0])
     boundary = NumericProperty()
     def __init__(self, **kwargs):
         
