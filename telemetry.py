@@ -134,7 +134,6 @@ class MainScreen(App):
                 
                 #print(ser.in_waiting)
                 self.data = temp.split()
-                print(self.data[4],self.data[5])
                 self.main.data = self.data
                 #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
                 self.diagnostics.data = self.data

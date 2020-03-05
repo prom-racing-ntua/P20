@@ -95,8 +95,8 @@ class Main(Screen):
         
         #for testing
         self.bind(data=self.update)
-        Clock.schedule_interval(self.tire_temps.update_linears, 0.05)
-        Clock.schedule_interval(self.tire_temps.update_temps, 0.05)
+        #Clock.schedule_interval(self.tire_temps.update_linears, 0.05)
+        #Clock.schedule_interval(self.tire_temps.update_temps, 0.05)
         
     #for testing, steady
     def rpm(self, dt):
@@ -106,8 +106,9 @@ class Main(Screen):
 
     def update(self, obj, value):
         if self.data:
+            print(self.data[2])
             #self.steering_wheel.icon_update = int(self.data[4])
-            self.tire_temps.lin[0] = int(self.data[4])
+            self.tire_temps.lin[0] = int(self.data[2])
             self.kw.value = int(self.data[5])
             self.cur.value = int(self.data[6])
             self.vol.value = int(self.data[7])
