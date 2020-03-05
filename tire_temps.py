@@ -60,10 +60,11 @@ class Tire_Temps(FloatLayout):
         
         #self.add_widget(self.arr)
 
-        Clock.schedule_interval(self.update, 0.5)
-        # Clock.schedule_interval(self.update_temps, 0.5)
-        # Clock.schedule_interval(self.update_linears, 0.1)
+        #Clock.schedule_interval(self.update, 0.5)
+        #Clock.schedule_interval(self.update_temps, 0.5)
+        #Clock.schedule_interval(self.update_linears, 0.1)
 
+        self.bind(lin=self.update_linears)
         self.bind(temps=self.update_temps)
 
     def update(self, dt):
@@ -81,10 +82,11 @@ class Tire_Temps(FloatLayout):
             self.rr.temp[i] = self.temps[3][i]
         
     def update_linears(self, dt):
-        self.fll.active_blocks = random.randint(0,19)
-        self.frl.active_blocks = random.randint(0,19)
-        self.rll.active_blocks = random.randint(0,19)
-        self.rrl.active_blocks = random.randint(0,19)
+        self.fll.active_blocks = round((self.lin[0])/12.5)
+        print(self.fll.active_blocks)
+        #self.frl.active_blocks = random.randint(0,19)
+        #self.rll.active_blocks = random.randint(0,19)
+        #self.rrl.active_blocks = random.randint(0,19)
 
 
 

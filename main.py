@@ -106,7 +106,8 @@ class Main(Screen):
 
     def update(self, obj, value):
         if self.data:
-            self.steering_wheel.icon_update = int(self.data[4])
+            #self.steering_wheel.icon_update = int(self.data[4])
+            self.tire_temps.lin[0] = int(self.data[4])
             self.kw.value = int(self.data[5])
             self.cur.value = int(self.data[6])
             self.vol.value = int(self.data[7])
