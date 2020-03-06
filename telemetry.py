@@ -132,7 +132,7 @@ class MainScreen(App):
             if ser.in_waiting:
                 temp = ser.readline()
                 
-                #print(ser.in_waiting)
+                print(ser.in_waiting)
                 self.data = temp.split()
                 self.main.data = self.data
                 #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
@@ -140,7 +140,7 @@ class MainScreen(App):
                 self.data_screen.data = self.data
                 #print("Sender is running for:" , float(self.data[0])/1000, "seconds")
         except Exception as e:
-            print(e)
+            #print(e)
             self.main.pc_status.serial_status = False
             try:
                 ser = serial.Serial(

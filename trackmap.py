@@ -31,6 +31,7 @@ class TrackMap(RelativeLayout):
     wid = NumericProperty(3)       
     trackfile = ("./assets/track.txt")
     im = Image()
+    index = NumericProperty(0)
     def __init__(self, **kwargs):
         super(TrackMap, self).__init__(**kwargs)
         earth_radius=6367116
@@ -44,7 +45,7 @@ class TrackMap(RelativeLayout):
         file.close()
 
         Clock.schedule_once(self.after_init)
-        Clock.schedule_interval(self.update_track_position, 1)
+        Clock.schedule_interval(self.update_track_position, .6)
 
     def after_init(self, dt):
         maxx = max(self.longs)
@@ -62,10 +63,10 @@ class TrackMap(RelativeLayout):
 
     def update_track_position(self, dt):
         self.remove_widget(self.im)
-        index = random.randint(1,len(self.coords))
-        if index%2:
-            index-=1
-        self.im = Image(pos=(self.coords[index] - 2*self.wid, self.coords[index+1] - 2*self.wid), source="assets/red_dot.png", size_hint= (0.05, 0.05), opacity=1)
+        self.index+=2
+        if self.index >= len(self.coords):
+            self.index = 0 
+        self.im = Image(pos=(self.coords[self.index] - 2*self.wid, self.coords[self.index+1] - 2*self.wid), source="assets/red_dot.png", size_hint= (0.05, 0.05), opacity=1)
         self.add_widget(self.im)
             
 # for converting geo_coords to x and y check this : https://stackoverflow.com/questions/16266809/convert-from-latitude-longitude-to-x-y

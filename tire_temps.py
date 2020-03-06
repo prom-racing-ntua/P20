@@ -42,10 +42,10 @@ class Tire_Temps(FloatLayout):
         self.fr = Tire(pos_hint={"x": 0.7, "y": 0.5}, size_hint=(0.2, 0.47), temp = [50,50,50,50], boundary=self.boundary)
         self.rl = Tire(pos_hint={"x": 0.1, "y": 0}, size_hint=(0.2, 0.47), temp = [50,50,50,50], boundary=self.boundary)
         self.rr = Tire(pos_hint={"x": 0.7, "y": 0}, size_hint=(0.2, 0.47), temp = [50,50,50,50], boundary=self.boundary)
-        self.fll = Progress_Bar(pos_hint={"x": 0.32, "y": 0.5}, size_hint=(0.03, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
-        self.frl = Progress_Bar(pos_hint={"x": 0.65, "y": 0.5}, size_hint=(0.03, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
-        self.rll = Progress_Bar(pos_hint={"x": 0.32, "y": 0}, size_hint=(0.03, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
-        self.rrl = Progress_Bar(pos_hint={"x": 0.65, "y": 0}, size_hint=(0.03, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
+        self.fll = Progress_Bar(pos_hint={"x": 0.31, "y": 0.5}, size_hint=(0.025, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
+        self.frl = Progress_Bar(pos_hint={"x": 0.66, "y": 0.5}, size_hint=(0.025, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
+        self.rll = Progress_Bar(pos_hint={"x": 0.31, "y": 0}, size_hint=(0.025, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
+        self.rrl = Progress_Bar(pos_hint={"x": 0.66, "y": 0}, size_hint=(0.025, 0.47) , orientation="vertical", color=[0,0,1,1], active_blocks=5)
         
         
         #self.add_widget(self.desc)

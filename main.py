@@ -45,7 +45,7 @@ class Main(Screen):
         cfgs = config['sensor_values']
 
         #setting up widgets
-        self.tire_temps = Tire_Temps(pos_hint={"center_x":0.5, "y": 0}, size_hint=(0.5, 0.3), temps=[[50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50]], boundary=int(cfgs['infrared_offset']))
+        self.tire_temps = Tire_Temps(pos_hint={"center_x":0.5, "y": 0}, size_hint=(0.45, 0.25), temps=[[50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50], [50, 50, 50, 50]], boundary=int(cfgs['infrared_offset']))
         self.battery = Parametric_Graph(pos_hint={"x":0, "y":0.32}, size_hint=(0.25, 0.5), label='Voltage (V)', boundaries=[0, 200, -10, 10])
         self.kw = Parametric_Bar(pos_hint={"x":0.02, "y":0.85}, size_hint=(0.05, 0.13), name="Power(kW)", value= 0, max_value=int(cfgs['kw_max']), color=[0,0,1,1], orientation="vertical")
         self.cur = Parametric_Bar(pos_hint={"x":0.09, "y":0.85}, size_hint=(0.05, 0.13), name="Current(A)", value=0, max_value=int(cfgs['cur_max']), color=[0,0,1,1], orientation="vertical")
@@ -61,8 +61,8 @@ class Main(Screen):
         self.motor_temp = Icon_Indicator(pos_hint={"x": 0.3, "y": 0.35}, size_hint=(0.1, 0.1), name="Motor Temp", value=0, unit="°C", boundaries=[int(cfgs['motor_temp_warn']), int(cfgs['motor_temp_crit'])], source="assets/motor_icon.png", color=[1, 1, 1, 1], opacity=0.4)
         self.inv_temp = Icon_Indicator(pos_hint={"x": 0.4, "y": 0.35}, size_hint=(0.1, 0.1), name="Inverter Temp", value=0, unit="°C", boundaries=[int(cfgs['inv_temp_warn']), int(cfgs['inv_temp_crit'])], source="assets/inverter2.png", color=[1, 1, 1, 1], opacity=0.4)
         self.bat_temp = Icon_Indicator(pos_hint={"x": 0.5, "y": 0.35}, size_hint=(0.1, 0.1), name="Battery Temp", value=0, unit="°C", boundaries=[int(cfgs['battery_temp_warn']), int(cfgs['battery_temp_crit'])], source="assets/battery4.png", color=[1, 1, 1, 1], opacity=0.6)
-        self.gps_speed = Parametric_Label(pos_hint={"x":0.57, "y":0.65}, size_hint=(0.07, 0.1), name1="50", name2="GPS Speed", font1="32sp")
-        self.hall_speed = Parametric_Label(pos_hint={"x":0.635, "y":0.65}, size_hint=(0.07, 0.1), name1="50", name2="Sensor Speed", font1="32sp")
+        self.gps_speed = Parametric_Label(pos_hint={"x":0.57, "y":0.65}, size_hint=(0.07, 0.1), name1="0", name2="GPS Speed", font1="32sp")
+        self.hall_speed = Parametric_Label(pos_hint={"x":0.635, "y":0.65}, size_hint=(0.07, 0.1), name1="0", name2="Sensor Speed", font1="32sp")
         self.dashboard = Dashboard(pos_hint={"x":0.03, "y":0.05}, size_hint=(0.1, 0.25))
         self.drs_button = Drs_Button(pos_hint= {"x" : 0.5, "y": 0.65}, size_hint=(0.05, 0.05))
         self.steering_wheel = Icon_Indicator(pos_hint={"x": 0.48, "y": 0.51}, size_hint=(0.07, 0.07), name="Steering Angle", value=0, unit="°" , boundaries=[100,120], source="assets/steering_wheel2.png", color=[0.8,0.8,0.8,1], angle=0, opacity=1)
@@ -106,9 +106,10 @@ class Main(Screen):
 
     def update(self, obj, value):
         if self.data:
-            print(self.data[2])
-            #self.steering_wheel.icon_update = int(self.data[4])
             self.tire_temps.lin[0] = int(self.data[2])
+            self.hall_speed.name1 = str(int(self.data[3]))
+            #print("HALL Value:", int(self.data[3]))
+            self.steering_wheel.icon_update = int(self.data[4])
             self.kw.value = int(self.data[5])
             self.cur.value = int(self.data[6])
             self.vol.value = int(self.data[7])
@@ -118,8 +119,7 @@ class Main(Screen):
             self.inv_temp.value = int(self.data[10])
             self.dashboard.status = int(self.data[11])
             
-            self.gps_speed.name1 = str(int(self.data[17]))
-            self.hall_speed.name1 = str(int(self.data[12]))
+            #self.gps_speed.name1 = str(int(self.data[17]))
             self.bias.percentage = int(self.data[13])
             self.apps.value = int(self.data[14])
             self.brake.value = int(self.data[15])
