@@ -21,6 +21,7 @@ Builder.load_string('''
             rgba: 1,1,1,1
         Line:
             rectangle: self.x, self.y, self.width, self.height
+            
     Image:
         source: "assets/green_dot.png"
         size_hint: 0.05, 0.05        
@@ -69,6 +70,7 @@ Builder.load_string('''
         opacity: root.status & 128
     Label:
         text: root.dash_labels[7] 
+    
 ''')
 
 
@@ -80,7 +82,7 @@ class Dashboard(GridLayout):
 
     def __init__(self, **kwargs):
         super(Dashboard, self).__init__(**kwargs)
-        self.cols = 2
+        self.cols = 4
         self.padding = 10
         
 
