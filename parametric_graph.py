@@ -56,7 +56,7 @@ class Parametric_Graph(BoxLayout):
             self.start_time = value[0]
         self.time = value[0] - self.start_time
         #print(self.time)
-        self.points.append((self.time, self.value + 325))
+        self.points.append([self.time, self.value + 325])
         self.plot.points = self.points
         self.mygraph.remove_plot(self.plot)
         self.mygraph.add_plot(self.plot) 

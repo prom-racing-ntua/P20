@@ -63,7 +63,7 @@ class Main(Screen):
         self.bat_temp = Icon_Indicator(pos_hint={"x": 0.5, "y": 0.35}, size_hint=(0.1, 0.1), name="Battery Temp", value=0, unit="°C", boundaries=[int(cfgs['battery_temp_warn']), int(cfgs['battery_temp_crit'])], source="assets/battery4.png", color=[1, 1, 1, 1], opacity=0.6)
         self.gps_speed = Parametric_Label(pos_hint={"x":0.57, "y":0.65}, size_hint=(0.07, 0.1), name1="0", name2="GPS Speed", font1="32sp")
         self.hall_speed = Parametric_Label(pos_hint={"x":0.635, "y":0.65}, size_hint=(0.07, 0.1), name1="0", name2="Sensor Speed", font1="32sp")
-        self.dashboard = Dashboard(pos_hint={"x":0.03, "y":0.05}, size_hint=(0.1, 0.25))
+        self.dashboard = Dashboard(pos_hint={"x":0.03, "y":0.05}, size_hint=(0.2, 0.25))
         self.drs_button = Drs_Button(pos_hint= {"x" : 0.5, "y": 0.65}, size_hint=(0.05, 0.05))
         self.steering_wheel = Icon_Indicator(pos_hint={"x": 0.48, "y": 0.51}, size_hint=(0.07, 0.07), name="Steering Angle", value=0, unit="°" , boundaries=[100,120], source="assets/steering_wheel2.png", color=[0.8,0.8,0.8,1], angle=0, opacity=1)
         self.downforce = Icon_Indicator(pos_hint={"x": 0.6, "y": 0.35}, size_hint=(0.1, 0.1), name="Downforce", value=0, color=[1, 1, 1, 1], opacity=0.9, source= "assets/downforce_icon.png")
