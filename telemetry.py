@@ -137,7 +137,7 @@ class MainScreen(App):
                 self.diagnostics.data = self.data
                 self.data_screen.data = self.data
         except Exception as e:
-            print(e)
+            #print(e)
             self.main.pc_status.serial_status = False
             try:
                 ser = serial.Serial(
