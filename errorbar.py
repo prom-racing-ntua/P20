@@ -36,6 +36,5 @@ class RV(RecycleView):
         
 
     def update(self, obj, val):
-        print(val)
         self.data.append({'text':str(val)})
 
