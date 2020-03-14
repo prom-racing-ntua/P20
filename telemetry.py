@@ -143,8 +143,8 @@ class MainScreen(App):
                 ser = serial.Serial(
                     baudrate='115200',
                     timeout=20,
-                    #port=str(serial.tools.list_ports.comports()[0]).split()[0]
-                    port="/dev/ttyUSB0"
+                    port=str(serial.tools.list_ports.comports()[0]).split()[0]
+                    #port="/dev/ttyUSB0"
                 )
                 self.main.pc_status.serial_status = True
             except Exception:

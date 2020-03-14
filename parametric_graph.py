@@ -14,32 +14,39 @@ Builder.load_string("""
         pos: root.pos 
         Graph:
             id: mygraph
-            xlabel: 'Time (secs)'
+            xlabel: 'Time(s)'
             ylabel: root.label
             x_grid: True
             x_grid_label: True
             y_grid: True
             y_grid_label: True
-            y_ticks_major: 40
-            x_ticks_major: root.xmax/10
-            xmin: 0
-            xmax: root.xmax
-            ymin: 300
-            ymax: 588
+            y_ticks_major: root.boundaries[2]/6
+            x_ticks_major: root.boundaries[1]/5
+            xmin: root.boundaries[0]
+            xmax: root.boundaries[1]
+            ymin: root.boundaries[2]
+            ymax: root.boundaries[3]
         
 """)
 
 
 class Parametric_Graph(BoxLayout):
-    points = ListProperty()
-    value = NumericProperty()
-    time = NumericProperty()
+    """A parametric graph of a given value in time \n
+        Type:BoxLayout
+    \n
+    Parameters: \n
+        boundaries: a list with upper and lower limits for both axis 
+        label: name for the y-axis of the unit the graph represents
+    """
+    # passing arguments
+    boundaries = ListProperty()
     label = StringProperty()
+    # function arguments
+    points = ListProperty()
+    time = NumericProperty()
     mygraph = ObjectProperty()
     update_graph = ObjectProperty()
     plot = ObjectProperty()
-    boundaries = ListProperty()
-    xmax = NumericProperty(10)
     start_time = NumericProperty(0)
 
     def __init__(self, **kwargs):
@@ -48,15 +55,13 @@ class Parametric_Graph(BoxLayout):
         self.bind(update_graph= self.update)
 
     def update(self, obj, value):
-        if value[0] - self.start_time >= self.xmax:
-            self.xmax *=2
-
-        self.value = value[1]
-        if self.start_time == 0:
+        if not self.start_time:
             self.start_time = value[0]
+        elif value[0] - self.start_time >= self.boundaries[1]:
+            self.boundaries[1] *=2
+        
         self.time = value[0] - self.start_time
-        #print(self.time)
-        self.points.append([self.time, self.value + 325])
+        self.points.append([self.time, value[1] + 325])
         self.plot.points = self.points
         self.mygraph.remove_plot(self.plot)
         self.mygraph.add_plot(self.plot) 
