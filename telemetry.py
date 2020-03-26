@@ -103,8 +103,7 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        #if serial.tools.list_ports.comports():
-        Clock.schedule_interval(self.readserial, 0.01)
+        Clock.schedule_interval(self.noserial, 0.5)
         return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
@@ -137,7 +136,7 @@ class MainScreen(App):
                 self.diagnostics.data = self.data
                 self.data_screen.data = self.data
         except Exception as e:
-            #print(e)
+            print(e)
             self.main.pc_status.serial_status = False
             try:
                 ser = serial.Serial(
@@ -149,17 +148,16 @@ class MainScreen(App):
                 self.main.pc_status.serial_status = True
             except Exception:
                 pass
+
+    def noserial(self, dt):
+        self.data = [random.randint(0,255) for i in range(250)]
+        self.main.data = self.data
+        self.diagnostics.data = self.data
+        self.data_screen.data = self.data
     
 
 if __name__ == '__main__':
     try:
-        #if serial.tools.list_ports.comports():
-            
-            #ser = serial.Serial(
-                #baudrate= '115200', 
-                #timeout= 20,
-                #port= str(serial.tools.list_ports.comports()[0]).split()[0]
-            #)
         MainScreen().run()
         
     except Exception as e:
