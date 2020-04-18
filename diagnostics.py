@@ -57,6 +57,7 @@ class Diagnostics(Screen):
 
     def test(self, dt):
         self.test1 = "same1"
+        #print(self.parent)
         #self.data[0] = 30
         #self.data[1] = 30
         #self.data[0] = random.randint(-10,130)

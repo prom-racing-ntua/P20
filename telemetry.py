@@ -18,6 +18,7 @@ import random
 import serial
 import serial.tools.list_ports   # import serial module
 import platform
+import time
 
 #custom class imports
 from tire_temps import Tire_Temps
@@ -91,6 +92,7 @@ class MainScreen(App):
     ser_bytes = NumericProperty()
     ser = serial.Serial()
     data = ListProperty([0,0,0,0,0,0])
+    errors = []
     sm = ScreenManager()
     main = Main(name='main')
     data_screen = Data_Screen(name='data')
@@ -103,7 +105,7 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.noserial, 0.5)
+        Clock.schedule_interval(self.noserial, 0.2)
         return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
@@ -150,10 +152,23 @@ class MainScreen(App):
                 pass
 
     def noserial(self, dt):
-        self.data = [random.randint(0,255) for i in range(250)]
+        self.data = [random.randint(0,255) for i in range(250)] #instead of readserial
+        start_time = time.time()
+        #self.errorgen()
+        #creates all errors for this batch, actual code will be much longer here
+        for i in range(250):
+            self.errors.append(self.data[i] > 250 and self.data[i] < 5)
+        #passes all the values 
         self.main.data = self.data
         self.diagnostics.data = self.data
         self.data_screen.data = self.data
+        #self.diagnostics.errors = self.errors
+        print(time.time()-start_time)#printing aprox handling time
+
+    def errorgen(self):
+        for i in range(250):
+            self.errors.append(self.data[i]>250 and self.data[i]<5)
+        
     
 
 if __name__ == '__main__':
