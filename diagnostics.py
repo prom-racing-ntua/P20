@@ -27,12 +27,9 @@ class Diagnostics(Screen):
     config.read('config.ini')
     cfgs = config['sensor_values']
 
-    test1 = StringProperty()
 
     def __init__(self, **kwargs):
         super(Diagnostics, self).__init__(**kwargs)
-
-        self.test1 = "same"
 
         self.rv = RV(pos_hint={"x": 0.05, "y": 0.02}, size_hint=(0.9, 0.2))
         self.add_widget(self.rv)
@@ -40,27 +37,13 @@ class Diagnostics(Screen):
         self.tabs = Datatabs(pos_hint={"x": 0.05, "y": 0.25}, size_hint=(0.9, 0.65))
         self.add_widget(self.tabs)
 
-        self.bind(data=self.errorgen)
-        self.bind(test1=self.errorgen)
-        Clock.schedule_interval(self.test, 0.5)
+        self.bind(errors=self.streamline_errors)
 
-    def errorgen(self, obj, value):
-        #print(value)
-        #apps validation
-        if not (0 <= self.data[0] <= int(self.cfgs['apps_max'])):
-            self.rv.new_error = 'apps value: {val} out of bounds (0-{mx})'.format(val=self.data[0], mx=self.cfgs['apps_max'])
-            #self.rv.data.append({'apps value: {val} out of bounds (0-{mx})'.format(val=self.data[0], mx=self.cfgs['apps_max'])})
-        #brake validation
-        if not (0 <= self.data[1] <= int(self.cfgs['brake_max'])):
-            self.rv.new_error = 'brake value: {val} out of bounds (0-{mx})'.format(val=self.data[1], mx=self.cfgs['brake_max'])
-            #self.rv.data.append({'brake value: {val} out of bounds (0-{mx})'.format(val=self.data[1], mx=self.cfgs['brake_max'])})
 
-    def test(self, dt):
-        self.test1 = "same1"
-        #print(self.parent)
-        #self.data[0] = 30
-        #self.data[1] = 30
-        #self.data[0] = random.randint(-10,130)
-        #self.data[1] = random.randint(-10,130)
+    def streamline_errors(self, obj, value):
+        for i in self.errors:
+            self.rv.new_error = "timestamp: " + i['timestamp'] + " error at pos: " + str(i['datapos']) + " value: " + str(i['value'])
+        self.errors = []
+
 
 
