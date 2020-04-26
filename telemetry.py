@@ -59,8 +59,7 @@ Builder.load_string("""
             on_press: 
                 app.root.current = 'diagnostics'
                 app.root.transition.direction = "right"
-            font_size: 10
-            
+            font_size: 10     
 <Data_Screen>:
     BoxLayout:
         size_hint: 0.035, 0.035
@@ -130,7 +129,6 @@ class MainScreen(App):
             global ser
             if ser.in_waiting:
                 temp = ser.readline()
-                #print(ser.in_waiting)
                 self.data = temp.split()
                 self.main.data = self.data
                 self.diagnostics.data = self.data
