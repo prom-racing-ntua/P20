@@ -18,6 +18,8 @@ import random
 import serial
 import serial.tools.list_ports   # import serial module
 import platform
+import time
+from datetime import datetime
 
 #custom class imports
 from tire_temps import Tire_Temps
@@ -90,6 +92,7 @@ class MainScreen(App):
     ser_bytes = NumericProperty()
     ser = serial.Serial()
     data = ListProperty([0,0,0,0,0,0])
+    errors = []
     sm = ScreenManager()
     main = Main(name='main')
     data_screen = Data_Screen(name='data')
@@ -102,7 +105,7 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.noserial, 0.5)
+        Clock.schedule_interval(self.noserial, 0.2)
         return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
@@ -123,6 +126,7 @@ class MainScreen(App):
         elif keycode == 27: # ascii code for ESC
             App.stop(self)
         return True
+
     
     def readserial(self, dt):
         try:
@@ -148,10 +152,34 @@ class MainScreen(App):
                 pass
 
     def noserial(self, dt):
-        self.data = [random.randint(0,255) for i in range(250)]
+        self.data = [random.randint(0,255) for i in range(250)] #instead of readserial
+        self.data[0] = 0#random.randint(0,2)
+
+        #creates all errors for this batch, actual code will be much longer here
+        self.update_errors()
+        #passes all the values 
         self.main.data = self.data
         self.diagnostics.data = self.data
         self.data_screen.data = self.data
+        self.diagnostics.errors = self.errors
+
+    def update_errors(self):
+        #stringA
+        if self.data[0] == 0:
+            for i in range(1,250):
+                if self.data[i] > 250 or self.data[i] < 5:
+                    self.errors.append({'datapos':i, 'value': self.data[i], 'timestamp': datetime.now().strftime("%H:%M:%S")})
+        #stringB
+        elif self.data[0] == 1:
+            pass
+        #stringC
+        elif self.data[0] == 2:
+            pass
+        #log and remove the errors  if they bunch up
+        if len(self.errors) > 20:
+            self.errors = []
+
+        
     
 
 if __name__ == '__main__':

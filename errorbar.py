@@ -27,6 +27,7 @@ Builder.load_string('''
 
 
 class RV(RecycleView):
+    '''To add a new error, set new_error (string property) to that error.'''
     new_error = StringProperty()
     #index = 
     def __init__(self, **kwargs):
@@ -37,4 +38,7 @@ class RV(RecycleView):
 
     def update(self, obj, val):
         self.data.append({'text':str(val)})
+        if len(self.data)>20:
+            self.data = self.data[10:]
+        print(len(self.data))
 
