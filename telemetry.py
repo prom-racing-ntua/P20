@@ -87,6 +87,9 @@ Builder.load_string("""
 
 """)
 
+#test
+f = open("log.txt", "r")
+
 class MainScreen(App):
 
     ser_bytes = NumericProperty()
@@ -101,11 +104,12 @@ class MainScreen(App):
     sm.add_widget(data_screen)
     sm.add_widget(diagnostics)
 
+
     def build(self):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.noserial, 0.2)
+        Clock.schedule_interval(self.noserial, 0.1)
         return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
@@ -152,16 +156,17 @@ class MainScreen(App):
                 pass
 
     def noserial(self, dt):
-        self.data = [random.randint(0,255) for i in range(250)] #instead of readserial
-        self.data[0] = 0#random.randint(0,2)
+        #self.data = [random.randint(0,255) for i in range(250)] #instead of readserial
+        #self.data[0] = 0#random.randint(0,2)
+        self.data = f.readline().split()
 
         #creates all errors for this batch, actual code will be much longer here
-        self.update_errors()
+        #self.update_errors()
         #passes all the values 
         self.main.data = self.data
-        self.diagnostics.data = self.data
-        self.data_screen.data = self.data
-        self.diagnostics.errors = self.errors
+        #self.diagnostics.data = self.data
+        #self.data_screen.data = self.data
+        #self.diagnostics.errors = self.errors
 
     def update_errors(self):
         #stringA

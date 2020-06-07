@@ -106,21 +106,33 @@ class Main(Screen):
 
     def update(self, obj, value):
         if self.data:
+            #linears 2-5
             self.tire_temps.lin[0] = int(self.data[2])
-            self.hall_speed.name1 = str(int(self.data[3]))
+            self.tire_temps.lin[1] = int(self.data[3])
+            self.tire_temps.lin[2] = int(self.data[4])
+            self.tire_temps.lin[3] = int(self.data[5])
+            
+            #self.hall_speed.name1 = str(int(self.data[3]))
             #print("HALL Value:", int(self.data[3]))
-            self.steering_wheel.icon_update = int(self.data[4])
-            self.kw.value = int(self.data[5])
-            self.cur.value = int(self.data[6])
-            self.vol.value = int(self.data[7])
-            self.battery.update_graph = [int(self.data[0])/1000, int(self.data[7])]
-            self.bat_temp.value = int(self.data[8])
-            self.motor_temp.value = int(self.data[9])
-            self.inv_temp.value = int(self.data[10])
-            self.dashboard.status = int(self.data[11])
+
+            #steering angle
+            self.steering_wheel.icon_update = int(self.data[6])
+            
+
+            self.kw.value = int(self.data[7])
+            #self.cur.value = int(self.data[8])
+            #self.vol.value = int(self.data[9])
+
+            #self.battery.update_graph = [int(self.data[0])/1000, int(self.data[7])]
+            self.bat_temp.value = float(self.data[10])
+            self.motor_temp.value = float(self.data[11])
+            self.inv_temp.value = float(self.data[12])
+
+            #self.dashboard.status = int(self.data[13])
             
             #self.gps_speed.name1 = str(int(self.data[17]))
             self.bias.percentage = int(self.data[13])
+
             self.apps.value = int(self.data[14])
             self.brake.value = int(self.data[15])
             self.rpmbar.value = 10 * int(self.data[16])

@@ -33,7 +33,7 @@ class Tire_Temps(FloatLayout):
     """
 
     temps = ListProperty()
-    lin = ListProperty([0])
+    lin = ListProperty([0,0,0,0])
     boundary = NumericProperty()
     def __init__(self, **kwargs):
         
@@ -83,6 +83,9 @@ class Tire_Temps(FloatLayout):
         
     def update_linears(self, *args):
         self.fll.active_blocks = round((self.lin[0])/12.5)
+        self.frl.active_blocks = round((self.lin[1])/12.5)
+        self.rll.active_blocks = round((self.lin[2])/12.5)
+        self.rrl.active_blocks = round((self.lin[3])/12.5)
         #print(self.fll.active_blocks)
         #self.frl.active_blocks = random.randint(0,19)
         #self.rll.active_blocks = random.randint(0,19)
