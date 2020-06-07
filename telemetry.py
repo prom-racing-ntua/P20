@@ -161,12 +161,12 @@ class MainScreen(App):
         self.data = f.readline().split()
 
         #creates all errors for this batch, actual code will be much longer here
-        #self.update_errors()
+        self.update_errors()
         #passes all the values 
         self.main.data = self.data
-        #self.diagnostics.data = self.data
-        #self.data_screen.data = self.data
-        #self.diagnostics.errors = self.errors
+        self.diagnostics.data = self.data
+        self.data_screen.data = self.data
+        self.diagnostics.errors = self.errors
 
     def update_errors(self):
         #stringA
