@@ -109,7 +109,7 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.noserial, 0.1)
+        Clock.schedule_interval(self.noserial, 0.5)
         return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
@@ -161,12 +161,21 @@ class MainScreen(App):
         self.data = f.readline().split()
 
         #creates all errors for this batch, actual code will be much longer here
-        self.update_errors()
+        #self.update_errors()
         #passes all the values 
         self.main.data = self.data
         self.diagnostics.data = self.data
-        self.data_screen.data = self.data
+        self.update_errors2()
+        #self.data_screen.data = self.data
         self.diagnostics.errors = self.errors
+
+    def update_errors2(self):
+        self.errors = []
+        for i in range(len(self.data)):
+            self.errors.append(0)
+        if int(self.data[7]) > 80:
+            self.errors[7] = 2
+
 
     def update_errors(self):
         #stringA

@@ -10,6 +10,9 @@ from configparser import ConfigParser
 from kivy.clock import Clock
 from kivy.lang import Builder
 
+#custom class imports
+from status_label import Status_Label
+
 Builder.load_string("""
 #:import Label kivy.uix.label.Label
 <Datatabs>:
@@ -19,32 +22,34 @@ Builder.load_string("""
         Line:
             rectangle: self.x, self.y, self.width, self.height
             width:1.25
-
-    do_default_tab: False
 """)
 
 
-class Datatabs(TabbedPanel):
+class Datatabs(GridLayout):
 
     lbls = ListProperty([])
+    items = ListProperty([])
 
     config = ConfigParser()
     config.read('config.ini')
-    cfgs = config['diagnostics']
+    cfgs = config['sensor_values']
 
     def __init__(self, **kwargs):
         super(Datatabs, self).__init__(**kwargs)
 
-        for key in self.cfgs:
-            #temp = Label()
-            #self.lbls.append()
-            pass
+        self.cols = 4
+        #self.padding = 2
 
-        self.tractive = TabbedPanelHeader(text='Tractive System')
+        self.lbls = self.cfgs['labels'].split(',')
+        print(self.lbls)
+        self.items = []
+
+        for lbl in self.lbls:
+            self.items.append(Status_Label(label=lbl, data='0'))
+            self.add_widget(self.items[-1])
+
+
+
+        #self.tractive = TabbedPanelHeader(text='Tractive System')
         #self.tractive.content = Label(text=self.lbls)
         #self.add_widget(self.tractive)
-
-        Clock.schedule_once(self.test, 0.5)
-
-    def test(self,dt):
-        self.lbls = "new"

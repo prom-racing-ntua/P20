@@ -27,7 +27,7 @@ for i in range(500):
         fr += 5
         rl -= 5
         rr -= 5
-    if kw<80:
+    if kw<=80:
         kw += 10
     bat_temp += random.randint(-1,1)
     mot_temp += random.randint(-1, 1)

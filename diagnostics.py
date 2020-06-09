@@ -37,13 +37,25 @@ class Diagnostics(Screen):
         self.tabs = Datatabs(pos_hint={"x": 0.05, "y": 0.25}, size_hint=(0.9, 0.65))
         self.add_widget(self.tabs)
 
-        self.bind(errors=self.streamline_errors)
+        #self.bind(errors=self.streamline_errors)
+        self.bind(data=self.update_data)
+        self.bind(errors=self.update_errors)
 
 
     def streamline_errors(self, obj, value):
         for i in self.errors:
             self.rv.new_error = "timestamp: " + i['timestamp'] + " error at pos: " + str(i['datapos']) + " value: " + str(i['value'])
         self.errors = []
+
+    def update_data(self, obj, value):
+        for i in range(len(self.data)):
+            self.tabs.items[i].data = self.data[i]
+    
+    def update_errors(self, obj, value):
+        for i in range(len(self.errors)):
+            self.tabs.items[i].status = self.errors[i]
+
+
 
 
 
