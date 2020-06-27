@@ -41,7 +41,7 @@ class Datatabs(GridLayout):
         #self.padding = 2
 
         self.lbls = self.cfgs['labels'].split(',')
-        print(self.lbls)
+        #print(self.lbls)
         self.items = []
 
         for lbl in self.lbls:

@@ -109,7 +109,8 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.noserial, 0.5)
+        Clock.schedule_interval(self.readserial, 0.04)
+        #Clock.schedule_interval(self.noserial, 0.5)
         return self.sm
     
     def press(self, keyboard, keycode, text, modifiers, type):
@@ -138,9 +139,11 @@ class MainScreen(App):
             if ser.in_waiting:
                 temp = ser.readline()
                 self.data = temp.split()
-                self.main.data = self.data
-                self.diagnostics.data = self.data
-                self.data_screen.data = self.data
+                self.main.dashboard.status[0] = int(self.data[0])
+                self.main.dashboard.status[1] = int(self.data[1])
+                #self.main.data = self.data
+                #self.diagnostics.data = self.data
+                #self.data_screen.data = self.data
         except Exception as e:
             print(e)
             self.main.pc_status.serial_status = False
