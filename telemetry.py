@@ -88,7 +88,7 @@ Builder.load_string("""
 """)
 
 #test
-f = open("log.txt", "r")
+#f = open("log.txt", "r")
 
 class MainScreen(App):
 
@@ -109,7 +109,7 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.readserial, 0.04)
+        #Clock.schedule_interval(self.readserial, 0.04)
         #Clock.schedule_interval(self.noserial, 0.5)
         return self.sm
     
@@ -130,6 +130,32 @@ class MainScreen(App):
                 self.sm.current = 'main'
         elif keycode == 27: # ascii code for ESC
             App.stop(self)
+        elif keycode == 273: #up
+            if self.sm.current == 'diagnostics':
+                if self.diagnostics.tabs.opacity == 0: # reset
+                    self.diagnostics.rv.pos_hint = {"x": 0.05, "y": 0.02}
+                    self.diagnostics.rv.size_hint = (0.9, 0.2)
+                    self.diagnostics.tabs.pos_hint = {"x": 0.05, "y": 0.25}
+                    self.diagnostics.tabs.size_hint = (0.9, 0.65)
+                    self.diagnostics.tabs.opacity = 1
+                else:
+                    self.diagnostics.rv.pos_hint= {"x": 0.05, "y": 0.02}
+                    self.diagnostics.rv.size_hint = (0.9, 0.05)
+                    self.diagnostics.tabs.pos_hint = {"x": 0.05, "y": 0.08}
+                    self.diagnostics.tabs.size_hint = (0.9, 0.94)
+        elif keycode == 274: #down
+            if self.sm.current == 'diagnostics':
+                if self.diagnostics.tabs.size_hint[1] == 0.94: # reset
+                    self.diagnostics.rv.pos_hint = {"x": 0.05, "y": 0.02}
+                    self.diagnostics.rv.size_hint = (0.9, 0.2)
+                    self.diagnostics.tabs.pos_hint = {"x": 0.05, "y": 0.25}
+                    self.diagnostics.tabs.size_hint = (0.9, 0.65)
+                else:
+                    self.diagnostics.rv.pos_hint = {"x": 0.05, "y": 0.02}
+                    self.diagnostics.rv.size_hint = (0.9, 0.95)
+                    self.diagnostics.tabs.pos_hint = {"x": 0.05, "y": 0.06}
+                    self.diagnostics.tabs.size_hint = (0.9, 0)
+                    self.diagnostics.tabs.opacity = 0
         return True
 
     

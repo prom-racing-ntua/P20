@@ -10,6 +10,7 @@ from configparser import ConfigParser
 from kivy.clock import Clock
 from kivy.lang import Builder
 
+
 #custom class imports
 from status_label import Status_Label
 
@@ -48,8 +49,3 @@ class Datatabs(GridLayout):
             self.items.append(Status_Label(label=lbl, data='0'))
             self.add_widget(self.items[-1])
 
-
-
-        #self.tractive = TabbedPanelHeader(text='Tractive System')
-        #self.tractive.content = Label(text=self.lbls)
-        #self.add_widget(self.tractive)

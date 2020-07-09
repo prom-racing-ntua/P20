@@ -4,11 +4,15 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.properties import ListProperty, NumericProperty, StringProperty
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
 from kivy.clock import Clock
 from configparser import ConfigParser
 import random
+from kivy.uix.label import Label
+from kivy.uix.behaviors import ButtonBehavior
+
 
 
 #custom class imports
@@ -16,9 +20,11 @@ from pc_status import Pc_Status
 from errorbar import RV
 from datatabs import Datatabs
 
+
 Builder.load_string('''
 <Diagnostics>:
 ''')
+
 
 class Diagnostics(Screen):
     data = ListProperty([0,0])
@@ -27,9 +33,9 @@ class Diagnostics(Screen):
     config.read('config.ini')
     cfgs = config['sensor_values']
 
-
     def __init__(self, **kwargs):
         super(Diagnostics, self).__init__(**kwargs)
+
 
         self.rv = RV(pos_hint={"x": 0.05, "y": 0.02}, size_hint=(0.9, 0.2))
         self.add_widget(self.rv)
@@ -37,7 +43,7 @@ class Diagnostics(Screen):
         self.tabs = Datatabs(pos_hint={"x": 0.05, "y": 0.25}, size_hint=(0.9, 0.65))
         self.add_widget(self.tabs)
 
-        #self.bind(errors=self.streamline_errors)
+        self.bind(errors=self.streamline_errors)
         self.bind(data=self.update_data)
         self.bind(errors=self.update_errors)
 

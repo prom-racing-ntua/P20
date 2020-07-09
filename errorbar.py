@@ -6,6 +6,7 @@ from kivy.uix.label import Label
 from kivy.clock import Clock
 from configparser import ConfigParser
 from kivy.uix.recycleview import RecycleView
+from kivy.uix.behaviors import ButtonBehavior
 
 
 Builder.load_string('''
@@ -34,7 +35,8 @@ class RV(RecycleView):
         super(RV, self).__init__(**kwargs)
         self.data = [{}]
         self.bind(new_error=self.update)
-        
+
+    
 
     def update(self, obj, val):
         self.data.append({'text':str(val)})
