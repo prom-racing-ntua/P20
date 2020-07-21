@@ -70,7 +70,7 @@ class Dashboard(FloatLayout):
         #self.shutdown.status = [1,0,1]
 
     def update(self, obj, value):
-        print(self.status)
+        #print(self.status)
         shut = [self.status[0] >> 0 & 1, self.status[0] >> 1 & 1, self.status[0] >> 2 & 1]
         air = [not (self.status[0] >> 3 & 1), not (self.status[0] >> 4 & 1)]
         stat = [self.status[0] >> 5 & 1, self.status[0] >> 6 & 1, self.status[1] >> 0 & 1, 0, self.status[0] >> 7 & 1]

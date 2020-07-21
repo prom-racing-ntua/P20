@@ -19,6 +19,7 @@ from kivy.uix.behaviors import ButtonBehavior
 from pc_status import Pc_Status
 from errorbar import RV
 from datatabs import Datatabs
+from statusbox import StatusBox
 
 
 Builder.load_string('''
@@ -36,11 +37,13 @@ class Diagnostics(Screen):
     def __init__(self, **kwargs):
         super(Diagnostics, self).__init__(**kwargs)
 
+        self.status = StatusBox(pos_hint={"x": 0.75, "y": 0.02}, size_hint=(0.25, 0.9))
+        self.add_widget(self.status)
 
-        self.rv = RV(pos_hint={"x": 0.05, "y": 0.02}, size_hint=(0.9, 0.2))
+        self.rv = RV(pos_hint={"x": 0.02, "y": 0.02}, size_hint=(0.7, 0.2))
         self.add_widget(self.rv)
 
-        self.tabs = Datatabs(pos_hint={"x": 0.05, "y": 0.25}, size_hint=(0.9, 0.65))
+        self.tabs = Datatabs(pos_hint={"x": 0.02, "y": 0.25}, size_hint=(0.7, 0.65))
         self.add_widget(self.tabs)
 
         self.bind(errors=self.streamline_errors)
@@ -55,7 +58,7 @@ class Diagnostics(Screen):
 
     def update_data(self, obj, value):
         for i in range(len(self.data)):
-            self.tabs.items[i].data = self.data[i]
+            self.tabs.items[i].data = str(self.data[i])
     
     def update_errors(self, obj, value):
         for i in range(len(self.errors)):

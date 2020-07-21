@@ -109,7 +109,7 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        #Clock.schedule_interval(self.readserial, 0.04)
+        Clock.schedule_interval(self.readserial, 0.1)
         #Clock.schedule_interval(self.noserial, 0.5)
         return self.sm
     
@@ -133,28 +133,28 @@ class MainScreen(App):
         elif keycode == 273: #up
             if self.sm.current == 'diagnostics':
                 if self.diagnostics.tabs.opacity == 0: # reset
-                    self.diagnostics.rv.pos_hint = {"x": 0.05, "y": 0.02}
-                    self.diagnostics.rv.size_hint = (0.9, 0.2)
-                    self.diagnostics.tabs.pos_hint = {"x": 0.05, "y": 0.25}
-                    self.diagnostics.tabs.size_hint = (0.9, 0.65)
+                    self.diagnostics.rv.pos_hint = {"x": 0.02, "y": 0.02}
+                    self.diagnostics.rv.size_hint = (0.7, 0.2)
+                    self.diagnostics.tabs.pos_hint = {"x": 0.02, "y": 0.25}
+                    self.diagnostics.tabs.size_hint = (0.7, 0.65)
                     self.diagnostics.tabs.opacity = 1
                 else:
-                    self.diagnostics.rv.pos_hint= {"x": 0.05, "y": 0.02}
-                    self.diagnostics.rv.size_hint = (0.9, 0.05)
-                    self.diagnostics.tabs.pos_hint = {"x": 0.05, "y": 0.08}
-                    self.diagnostics.tabs.size_hint = (0.9, 0.94)
+                    self.diagnostics.rv.pos_hint= {"x": 0.02, "y": 0.02}
+                    self.diagnostics.rv.size_hint = (0.7, 0.05)
+                    self.diagnostics.tabs.pos_hint = {"x": 0.02, "y": 0.08}
+                    self.diagnostics.tabs.size_hint = (0.7, 0.9)
         elif keycode == 274: #down
             if self.sm.current == 'diagnostics':
-                if self.diagnostics.tabs.size_hint[1] == 0.94: # reset
-                    self.diagnostics.rv.pos_hint = {"x": 0.05, "y": 0.02}
-                    self.diagnostics.rv.size_hint = (0.9, 0.2)
-                    self.diagnostics.tabs.pos_hint = {"x": 0.05, "y": 0.25}
-                    self.diagnostics.tabs.size_hint = (0.9, 0.65)
+                if self.diagnostics.tabs.size_hint[1] == 0.9: # reset
+                    self.diagnostics.rv.pos_hint = {"x": 0.02, "y": 0.02}
+                    self.diagnostics.rv.size_hint = (0.7, 0.2)
+                    self.diagnostics.tabs.pos_hint = {"x": 0.02, "y": 0.25}
+                    self.diagnostics.tabs.size_hint = (0.7, 0.65)
                 else:
-                    self.diagnostics.rv.pos_hint = {"x": 0.05, "y": 0.02}
-                    self.diagnostics.rv.size_hint = (0.9, 0.95)
-                    self.diagnostics.tabs.pos_hint = {"x": 0.05, "y": 0.06}
-                    self.diagnostics.tabs.size_hint = (0.9, 0)
+                    self.diagnostics.rv.pos_hint = {"x": 0.02, "y": 0.02}
+                    self.diagnostics.rv.size_hint = (0.7, 0.95)
+                    self.diagnostics.tabs.pos_hint = {"x": 0.02, "y": 0.06}
+                    self.diagnostics.tabs.size_hint = (0.7, 0)
                     self.diagnostics.tabs.opacity = 0
         return True
 
@@ -165,10 +165,8 @@ class MainScreen(App):
             if ser.in_waiting:
                 temp = ser.readline()
                 self.data = temp.split()
-                self.main.dashboard.status[0] = int(self.data[0])
-                self.main.dashboard.status[1] = int(self.data[1])
-                #self.main.data = self.data
-                #self.diagnostics.data = self.data
+                self.main.data = self.data
+                self.diagnostics.data = self.data
                 #self.data_screen.data = self.data
         except Exception as e:
             print(e)
