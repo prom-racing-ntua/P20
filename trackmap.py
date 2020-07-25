@@ -52,7 +52,7 @@ class TrackMap(RelativeLayout):
         minx = min(self.longs)
         maxy = max(self.lats)
         miny = min(self.lats)
-        pixel_height = 1.2 * self.size_hint[1] * Window.height 
+        pixel_height = 1.4 * self.size_hint[1] * Window.height 
         pixel_width = self.size_hint[0] * Window.width
         print(Window.height, Window.width) 
         scalex = pixel_width / (maxx - minx)
