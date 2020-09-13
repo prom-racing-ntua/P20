@@ -38,7 +38,7 @@ class StatusBox(FloatLayout):
         super(StatusBox, self).__init__(**kwargs)
 
         self.dashboard = Status_Block(size_hint=(1, 0.3), pos_hint={'x': 0, 'y': 0.7}, labels=self.cfgs['labels_dash'].split(','), colors=self.cfgs['colors_dash'].split(','))
-
+        #self.bms = Status_Block(size_hint=(1, 0.3), pos_hint={'x': 0, 'y': 0.7}, labels=self.cfgs['labels_dash'].split(','), colors=self.cfgs['colors_dash'].split(','))
         self.add_widget(self.dashboard)
 
         #self.bind()

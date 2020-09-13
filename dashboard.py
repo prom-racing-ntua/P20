@@ -37,11 +37,11 @@ Builder.load_string('''
 
 class Dashboard(FloatLayout):
 
-    status = ListProperty([255,255,255,255])
+    status = ListProperty([255,255,255,255,255,255])
     shutdown_labels = ["AMS","IMD","BSPD"]
     airs_labels = ["Air-", "Air+"]
     button_labels = ["A/A", "RTD", "DRS", "Page Left", "Page Right", "Encoder"]
-    status_labels = ["A/A", "RTD", "VCU Req", "Inverter Enable", "DRS"]
+    status_labels = ["A/A", "RTD", "Soft BSPD", "Inv Enable", "DRS"]
     
     def __init__(self, **kwargs):
         super(Dashboard, self).__init__(**kwargs)
@@ -73,7 +73,7 @@ class Dashboard(FloatLayout):
         #print(self.status)
         shut = [self.status[0] >> 0 & 1, self.status[0] >> 1 & 1, self.status[0] >> 2 & 1]
         air = [not (self.status[0] >> 3 & 1), not (self.status[0] >> 4 & 1)]
-        stat = [self.status[0] >> 5 & 1, self.status[0] >> 6 & 1, self.status[1] >> 0 & 1, 0, self.status[0] >> 7 & 1]
+        stat = [self.status[0] >> 5 & 1, self.status[0] >> 6 & 1, self.status[2] >> 5 & 1, self.status[2] >> 0 & 1, self.status[0] >> 7 & 1]
         btns = [self.status[1] >> 2 & 1, self.status[1] >> 3 & 1, self.status[1] >> 7 & 1, self.status[1] >> 5 & 1, self.status[1] >> 6 & 1, self.status[1] >> 4 & 1]
         self.shutdown.status = shut
         self.airs.status = air

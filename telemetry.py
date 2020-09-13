@@ -93,7 +93,7 @@ Builder.load_string("""
 class MainScreen(App):
 
     ser_bytes = NumericProperty()
-    ser = serial.Serial()
+    ser = serial.Serial(baudrate=115200)
     data = ListProperty([0,0,0,0,0,0])
     errors = []
     sm = ScreenManager()
@@ -109,10 +109,11 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.readserial, 0.1)
+        Clock.schedule_interval(self.readserial, 0.005)
         #Clock.schedule_interval(self.noserial, 0.5)
         return self.sm
     
+    #keyboard inputs
     def press(self, keyboard, keycode, text, modifiers, type):
         if keycode == 275: # ascii code for left
             if self.sm.current == 'main':
@@ -163,8 +164,9 @@ class MainScreen(App):
         try:
             global ser
             if ser.in_waiting:
-                temp = ser.readline()
-                self.data = temp.split()
+                print(ser.in_waiting)
+                #temp = ser.readline()
+                self.data = ser.readline().split()
                 self.main.data = self.data
                 self.diagnostics.data = self.data
                 #self.data_screen.data = self.data

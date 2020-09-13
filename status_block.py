@@ -21,7 +21,7 @@ led_colors = ["assets/green_dot.png",
 
 Builder.load_string('''
 <Status_Block>:
-    cols: 4
+    cols: 6
         
     canvas.before:
         Color:
@@ -48,7 +48,7 @@ class Status_Block(GridLayout):
 
         for i in range(len(self.labels)):
             self.add_widget(Label(text=self.labels[i]))
-            self.leds.append(Image(source=led_colors[int(self.colors[i])], size_hint=(0.35, 0.35)))
+            self.leds.append(Image(source=led_colors[int(self.colors[i])], size_hint=(0.25, 0.25)))
             self.add_widget(self.leds[-1])
 
         self.bind(status=self.update)

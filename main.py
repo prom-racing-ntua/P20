@@ -60,7 +60,7 @@ class Main(Screen):
         self.apps = Parametric_Bar(pos_hint={"x":0.35, "y":0.65}, size_hint=(0.05, 0.13), name="APPS(%)", value=0, max_value=int(cfgs['apps_max']), color=[0,1,0,1], orientation="vertical")
         self.brake = Parametric_Bar(pos_hint={"x":0.42, "y":0.65}, size_hint=(0.05, 0.13), name="Brake(%)", value=0, max_value=int(cfgs['brake_max']), color=[1,0,0,1], orientation="vertical")
         self.bias = Brake_Bias(pos_hint={"x":0.35, "y":0.5}, size_hint=(0.1, 0.1), percentage = 0)
-        self.rpmbar = RpmBar(pos_hint ={"x":0.35, "y":0.8},size_hint= (0.35, 0.05), value=1000, max_value=int(cfgs['rpm_max']), color=[1,0,0,1])
+        self.rpmbar = RpmBar(pos_hint ={"x":0.35, "y":0.8},size_hint= (0.35, 0.05), value=200, max_value=int(cfgs['rpm_max']), color=[1,0,0,1])
         self.motor_temp = Icon_Indicator(pos_hint={"x": 0.3, "y": 0.35}, size_hint=(0.1, 0.1), name="Motor Temp", value=0, unit="°C", boundaries=[int(cfgs['motor_temp_warn']), int(cfgs['motor_temp_crit'])], source="assets/motor_icon.png", color=[1, 1, 1, 1], opacity=0.4)
         self.inv_temp = Icon_Indicator(pos_hint={"x": 0.4, "y": 0.35}, size_hint=(0.1, 0.1), name="Inverter Temp", value=0, unit="°C", boundaries=[int(cfgs['inv_temp_warn']), int(cfgs['inv_temp_crit'])], source="assets/inverter2.png", color=[1, 1, 1, 1], opacity=0.4)
         self.bat_temp = Icon_Indicator(pos_hint={"x": 0.5, "y": 0.35}, size_hint=(0.1, 0.1), name="Battery Temp", value=0, unit="°C", boundaries=[int(cfgs['battery_temp_warn']), int(cfgs['battery_temp_crit'])], source="assets/battery4.png", color=[1, 1, 1, 1], opacity=0.6)
@@ -70,7 +70,8 @@ class Main(Screen):
         self.drs_button = Drs_Button(pos_hint= {"x" : 0.5, "y": 0.65}, size_hint=(0.05, 0.05))
         self.steering_wheel = Icon_Indicator(pos_hint={"x": 0.48, "y": 0.51}, size_hint=(0.07, 0.07), name="Steering Angle", value=0, unit="°" , boundaries=[100,120], source="assets/steering_wheel2.png", color=[0.8,0.8,0.8,1], angle=0, opacity=1)
         self.downforce = Icon_Indicator(pos_hint={"x": 0.6, "y": 0.35}, size_hint=(0.1, 0.1), name="Downforce", value=0, color=[1, 1, 1, 1], opacity=0.9, source= "assets/downforce_icon.png")
-        
+        self.enc_map = Parametric_Label(pos_hint={"x":0.595, "y":0.49}, size_hint=(0.07, 0.1), name1="0", name2="Encoder Map", font1="32sp")
+
         #adding widgets
         self.add_widget(self.battery)   
         self.add_widget(self.tire_temps)
@@ -94,6 +95,7 @@ class Main(Screen):
         self.add_widget(self.drs_button)
         self.add_widget(self.steering_wheel)
         self.add_widget(self.downforce)
+        self.add_widget(self.enc_map)
         
         
         #for testing
@@ -113,6 +115,11 @@ class Main(Screen):
             #dashboard
             self.dashboard.status[0] = int(self.data[2])
             self.dashboard.status[1] = int(self.data[3])
+            self.dashboard.status[2] = int(self.data[28])
+            self.dashboard.status[3] = int(self.data[29])
+
+            #encoder map
+            self.enc_map.name1 = str(int(self.data[27]))
 
             #bms
             self.vol.value = float(self.data[10])
@@ -132,7 +139,7 @@ class Main(Screen):
             #self.steering_wheel.icon_update = int(self.data[6])
             
 
-            #self.kw.value = int(self.data[7])
+            self.kw.value = int(self.data[34])
             #self.cur.value = int(self.data[8])
             #self.vol.value = int(self.data[9])
 
@@ -146,6 +153,7 @@ class Main(Screen):
             #self.gps_speed.name1 = str(int(self.data[17]))
             #self.bias.percentage = int(self.data[13])
 
-            #self.apps.value = int(self.data[14])
-            #self.brake.value = int(self.data[15])
-            #self.rpmbar.value = 10 * int(self.data[16])
+            self.apps.value = (int(self.data[23]) + int(self.data[24]))/2
+            self.brake.value = int(self.data[25])  
+            
+            self.rpmbar.value = int(self.data[33])

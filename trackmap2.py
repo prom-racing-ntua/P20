@@ -91,15 +91,14 @@ class TrackMap2(FloatLayout):
         #print(self.coordshint)
 
         Clock.schedule_once(self.render,0.1)
-        print(Window.height, Window.width)
-        print(self.width,self.height)
-        print(self.x,self.y)
+        #print(Window.height, Window.width)
+        #print(self.width,self.height)
+        #print(self.x,self.y)
 
-        #with self.canvas.after:
-            #Color([1, 1, 0, 1])
-            #Line(points=self.coordshint, width=1)
+        
+
     def render(self,dt):
         self.points = [(self.pos[0]+self.width*self.coordshint[i]) if i % 2 == 0 else (
             self.pos[1]+self.height*self.coordshint[i]) for i in range(len(self.coordshint))]
-        print(self.points)
+        #print(self.points)
         self.canvas.add(Line(points=self.points, width=1))
