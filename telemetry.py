@@ -12,7 +12,7 @@ from kivy.lang import Builder
 from kivy.config import Config
 from kivy.uix.layout import Layout
 from kivy.clock import Clock
-from kivy.properties import StringProperty, ListProperty, NumericProperty, BooleanProperty
+from kivy.properties import StringProperty, ListProperty, NumericProperty, BooleanProperty, ObjectProperty
 from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
 import random
 import serial
@@ -38,6 +38,7 @@ from drs_button import Drs_Button
 from main import Main
 from data_screen import Data_Screen
 from diagnostics import Diagnostics
+from extractor import extract
 
 Builder.load_string("""
 <Main>:
@@ -95,6 +96,7 @@ class MainScreen(App):
     ser_bytes = NumericProperty()
     ser = serial.Serial(baudrate=115200)
     data = ListProperty([0,0,0,0,0,0])
+    info = ObjectProperty()
     errors = []
     sm = ScreenManager()
     main = Main(name='main')
@@ -109,8 +111,15 @@ class MainScreen(App):
         Window.clearcolor = (0, 0, 0, 1)
         Window.fullscreen = 'auto'
         Window.bind(on_key_down=self.press)
-        Clock.schedule_interval(self.readserial, 0.005)
-        #Clock.schedule_interval(self.noserial, 0.5)
+
+        #create data dictionary
+        self.info = extract('telemetry2.xlsx')
+        self.main.info = self.info
+        self.diagnostics.info = self.info
+        self.diagnostics.tabs.info = self.info 
+
+        #Clock.schedule_interval(self.readserial, 0.05)
+        Clock.schedule_interval(self.noserial, 0.5)
         return self.sm
     
     #keyboard inputs
@@ -164,11 +173,17 @@ class MainScreen(App):
         try:
             global ser
             if ser.in_waiting:
-                print(ser.in_waiting)
+                #print(ser.in_waiting)
+                #length = ser.in_waiting
                 #temp = ser.readline()
                 self.data = ser.readline().split()
+                ser.reset_input_buffer()
+                #print(len(self.data))
+                #print(self.data[23])
                 self.main.data = self.data
-                self.diagnostics.data = self.data
+                #print(len(self.main.data))
+                #print(str(int(self.data[28])))
+                #self.diagnostics.data = self.data
                 #self.data_screen.data = self.data
         except Exception as e:
             print(e)
@@ -176,7 +191,7 @@ class MainScreen(App):
             try:
                 ser = serial.Serial(
                     baudrate='115200',
-                    timeout=20,
+                    timeout=1,
                     port=str(serial.tools.list_ports.comports()[0]).split()[0]
                     #port="/dev/ttyUSB0"
                 )
@@ -185,18 +200,15 @@ class MainScreen(App):
                 pass
 
     def noserial(self, dt):
-        #self.data = [random.randint(0,255) for i in range(250)] #instead of readserial
-        #self.data[0] = 0#random.randint(0,2)
-        self.data = f.readline().split()
+        self.data = [random.randint(0,255) for i in range(60)] #instead of readserial
 
-        #creates all errors for this batch, actual code will be much longer here
-        #self.update_errors()
         #passes all the values 
         self.main.data = self.data
-        self.diagnostics.data = self.data
-        self.update_errors2()
+        self.diagnostics.update(self.data)
         #self.data_screen.data = self.data
-        self.diagnostics.errors = self.errors
+
+
+
 
     def update_errors2(self):
         self.errors = []

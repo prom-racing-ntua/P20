@@ -2,7 +2,7 @@
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
-from kivy.properties import ListProperty, NumericProperty, StringProperty
+from kivy.properties import ListProperty, NumericProperty, StringProperty, ObjectProperty
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.scrollview import ScrollView
@@ -34,6 +34,8 @@ class Diagnostics(Screen):
     config.read('config.ini')
     cfgs = config['sensor_values']
 
+    info = ObjectProperty()
+
     def __init__(self, **kwargs):
         super(Diagnostics, self).__init__(**kwargs)
 
@@ -47,7 +49,7 @@ class Diagnostics(Screen):
         self.add_widget(self.tabs)
 
         self.bind(errors=self.streamline_errors)
-        self.bind(data=self.update_data)
+        #self.bind(data=self.update_data)
         self.bind(errors=self.update_errors)
 
 
@@ -56,9 +58,9 @@ class Diagnostics(Screen):
             self.rv.new_error = "timestamp: " + i['timestamp'] + " error at pos: " + str(i['datapos']) + " value: " + str(i['value'])
         self.errors = []
 
-    def update_data(self, obj, value):
-        for i in range(len(self.data)):
-            self.tabs.items[i].data = str(self.data[i])
+    def update(self,data):
+        for i in self.tabs.lbls:
+            self.tabs.items[i].data = str(data[self.info[i]['pos']])
     
     def update_errors(self, obj, value):
         for i in range(len(self.errors)):

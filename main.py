@@ -12,7 +12,7 @@ from kivy.lang import Builder
 from kivy.config import Config
 from kivy.uix.layout import Layout
 from kivy.clock import Clock
-from kivy.properties import StringProperty, ListProperty, NumericProperty
+from kivy.properties import StringProperty, ListProperty, NumericProperty, ObjectProperty
 from kivy.uix.screenmanager import Screen, ScreenManager
 import random
 from configparser import ConfigParser
@@ -38,6 +38,7 @@ from drs_button import Drs_Button
 class Main(Screen):
     
     data = ListProperty()
+    info = ObjectProperty()
     
     def __init__(self, **kwargs):
         super(Main, self).__init__(**kwargs)    
@@ -110,50 +111,54 @@ class Main(Screen):
         self.rpmbar.value += 1000
 
     def update(self, obj, value):
-        if self.data:
+        try:    
+            if self.data:
 
-            #dashboard
-            self.dashboard.status[0] = int(self.data[2])
-            self.dashboard.status[1] = int(self.data[3])
-            self.dashboard.status[2] = int(self.data[28])
-            self.dashboard.status[3] = int(self.data[29])
+                #dashboard
+                self.dashboard.status[0] = int(self.data[2])
+                self.dashboard.status[1] = int(self.data[3])
+                self.dashboard.status[2] = int(self.data[28])
+                self.dashboard.status[3] = int(self.data[29])
 
-            #encoder map
-            self.enc_map.name1 = str(int(self.data[27]))
+                #encoder map
+                self.enc_map.name1 = str(int(self.data[27]))
 
-            #bms
-            self.vol.value = float(self.data[10])
-            self.cur.value = float(self.data[17])
-            self.kw.value = self.vol.value*self.cur.value
+                #bms
+                self.vol.value = float(self.data[10])
+                self.cur.value = float(self.data[17])
+                self.kw.value = self.vol.value*self.cur.value
 
-            #linears 2-5
-            #self.tire_temps.lin[0] = int(self.data[2])
-            #self.tire_temps.lin[1] = int(self.data[3])
-            #self.tire_temps.lin[2] = int(self.data[4])
-            #self.tire_temps.lin[3] = int(self.data[5])
-            
-            #self.hall_speed.name1 = str(int(self.data[3]))
-            #print("HALL Value:", int(self.data[3]))
+                #linears 2-5
+                #self.tire_temps.lin[0] = int(self.data[2])
+                #self.tire_temps.lin[1] = int(self.data[3])
+                #self.tire_temps.lin[2] = int(self.data[4])
+                #self.tire_temps.lin[3] = int(self.data[5])
+                
+                #self.hall_speed.name1 = str(int(self.data[3]))
+                #print("HALL Value:", int(self.data[3]))
 
-            #steering angle
-            #self.steering_wheel.icon_update = int(self.data[6])
-            
+                #steering angle
+                #self.steering_wheel.icon_update = int(self.data[6])
+                
 
-            self.kw.value = int(self.data[34])
-            #self.cur.value = int(self.data[8])
-            #self.vol.value = int(self.data[9])
+                self.kw.value = int(self.data[34])
+                #self.cur.value = int(self.data[8])
+                #self.vol.value = int(self.data[9])
 
-            #self.battery.update_graph = [int(self.data[0])/1000, int(self.data[7])]
-            #self.bat_temp.value = float(self.data[10])
-            #self.motor_temp.value = float(self.data[11])
-            #self.inv_temp.value = float(self.data[12])
+                #self.battery.update_graph = [int(self.data[0])/1000, int(self.data[7])]
+                #self.bat_temp.value = float(self.data[10])
+                self.motor_temp.value = int(self.data[46])
+                self.inv_temp.value = int(self.data[45])
 
-            #self.dashboard.status = int(self.data[13])
-            
-            #self.gps_speed.name1 = str(int(self.data[17]))
-            #self.bias.percentage = int(self.data[13])
+                #self.dashboard.status = int(self.data[13])
+                
+                #self.gps_speed.name1 = str(int(self.data[17]))
+                #self.bias.percentage = int(self.data[13])
 
-            self.apps.value = (int(self.data[23]) + int(self.data[24]))/2
-            self.brake.value = int(self.data[25])  
-            
-            self.rpmbar.value = int(self.data[33])
+                self.apps.value = (int(self.data[23]) + int(self.data[24]))/2
+                self.brake.value = int(self.data[25])  
+                
+                self.rpmbar.value = int(self.data[33])
+        except IndexError as e:
+            print(self.data)
+
